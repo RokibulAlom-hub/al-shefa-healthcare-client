@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import  { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Authcontext } from "../AuthProvider/AuthProvider";
 
 const HealthcareNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const {name} = useContext(Authcontext)
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+ console.log(name);
+ 
   return (
     <nav className="bg-white shadow-lg border-b-2 border-blue-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
