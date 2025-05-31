@@ -1,12 +1,15 @@
-import  { useState } from "react";
+import  {  useState } from "react";
 import { Heart, Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Authcontext } from "../AuthProvider/AuthProvider";
+import GoogleLogin from "../Components/GoogleLogin";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = () => {
     // Add your login logic here
   };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -79,18 +82,7 @@ const LoginPage = () => {
           </div>
           {/* Social Login Options */}
           <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-200"
-            >
-              <span className="ml-2">Google</span>
-            </button>
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-200"
-            >
-              <span className="ml-2">Facebook</span>
-            </button>
+            <GoogleLogin></GoogleLogin>
           </div>
           {/* Register Link */}
           <div className="text-center">
