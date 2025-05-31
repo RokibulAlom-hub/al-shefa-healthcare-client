@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const HealthcareNavbar = () => {
@@ -32,7 +32,7 @@ const HealthcareNavbar = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link>Login</Link>
+            <Link to="/login">Login</Link>
           </div>
 
           {/* Mobile menu button */}
@@ -51,7 +51,7 @@ const HealthcareNavbar = () => {
 
               {/* Mobile CTA Buttons */}
               <div className="pt-4 border-t border-gray-200 space-y-2">
-                <Link>Login</Link>
+                <Link to="/login">Login</Link>
               </div>
             </div>
           </div>
