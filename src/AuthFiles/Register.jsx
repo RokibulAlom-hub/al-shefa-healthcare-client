@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Heart, Eye, EyeOff, Mail, Lock, Phone, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  //   const handleInputChange = (e) => {
-  //     const { name, value, type, checked } = e.target;
-  //     setFormData({
-  //       ...formData,
-  //       [name]: type === 'checkbox' ? checked : value
-  //     });
-  //   };
+  const {createUserbyMail} = useAuth();
+const handleSubmit = () => {
+   createUserbyMail()
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -162,6 +159,7 @@ const RegisterPage = () => {
           <div>
             <button
               type="button"
+              onClick={handleSubmit}
               className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200"
             >
               Create My Account

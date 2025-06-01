@@ -1,18 +1,26 @@
-import { useContext } from "react";
 import  { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Authcontext } from "../AuthProvider/AuthProvider";
+import useAuth from "../Hooks/useAuth";
 
 const HealthcareNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {name} = useContext(Authcontext)
+  const {user,logout} = useAuth()
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
- console.log(name);
- 
-  return (
-    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
+  //logut function
+  const handleLogout = () => {
+    console.log('logout button working');
+    
+    logout()
+    .then((res) => {
+      console.log(res);
+      alert("logout successfully")
+    })
+  } 
+  console.log(user);
+  
+  return (    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mother div or container of desktop navigation menu */}
         <div className="flex justify-between items-center h-16">
@@ -37,6 +45,9 @@ const HealthcareNavbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/login">Login</Link>
           </div>
+          <button onClick={handleLogout} className="hidden md:flex items-center space-x-4">
+           Logout
+          </button>
 
           {/* Mobile menu button */}
           <div className="md:hidden">

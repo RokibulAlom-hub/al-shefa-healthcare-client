@@ -5,7 +5,7 @@ const GoogleLogin = () => {
   const handlegoggle = () => {
     googleLogin()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
       })
       .catch((err) => console.log(err.message));
   };

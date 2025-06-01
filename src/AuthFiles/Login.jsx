@@ -1,8 +1,8 @@
 import  {  useState } from "react";
 import { Heart, Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Authcontext } from "../AuthProvider/AuthProvider";
-import GoogleLogin from "../Components/GoogleLogin";
+import GoogleLogin from "../Hooks/GoogleLogin";
+
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
