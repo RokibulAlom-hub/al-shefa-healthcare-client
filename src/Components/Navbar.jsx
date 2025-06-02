@@ -1,21 +1,21 @@
 import  { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 
 const HealthcareNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {user,logout} = useAuth()
+  const {user,logout} = useAuth();
+  const navigate = useNavigate()
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
   //logut function
   const handleLogout = () => {
-    console.log('logout button working');
-    
     logout()
     .then((res) => {
       console.log(res);
       alert("logout successfully")
+      navigate('/login')
     })
   } 
   console.log(user);
@@ -39,6 +39,7 @@ const HealthcareNavbar = () => {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLink>Home</NavLink>
+            <NavLink to="/demo">Demo</NavLink>
           </div>
 
           {/* Desktop CTA Buttons */}

@@ -4,6 +4,8 @@ import HomeLayout from "../Layouts/HomeLayout/HomeLayout";
 import Home from "../Homepages/Home";
 import RegisterPage from "../AuthFiles/Register";
 import LoginPage from "../AuthFiles/Login";
+import Privateroute from "./Privateroute";
+import DemoForRoute from "../Homepages/DemoForRoute";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -24,6 +26,12 @@ export const router = createBrowserRouter([
                 path:'/login',
                 element:<LoginPage></LoginPage>
             },
+            {
+                path:'/demo',
+                element:<Privateroute>
+                    <DemoForRoute></DemoForRoute>
+                </Privateroute>
+            }
         ]
     }
 ])

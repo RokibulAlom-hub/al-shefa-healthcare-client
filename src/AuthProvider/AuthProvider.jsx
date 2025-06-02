@@ -12,7 +12,8 @@ import { auth } from "../Firebase/Firebase.init";
 // creating authcontext for global access
 export const Authcontext = createContext(null);
 const Authprovider = ({ children }) => {
-    const [user,setUser] = useState(null)
+    const [user,setUser] = useState(null);
+    const [loading,setLoading] = useState(true)
   const googleProvider = new GoogleAuthProvider();
 
   //create user
@@ -37,7 +38,7 @@ const Authprovider = ({ children }) => {
     const unsubscriber = onAuthStateChanged(auth,(currentUser) =>{
        setUser(currentUser)
     //    console.log('observer is watching you', currentUser);
-       
+    setLoading(false)
     })
     return () => {
         unsubscriber()
@@ -49,6 +50,7 @@ const Authprovider = ({ children }) => {
     createUserbyMail,
     userLogin,
     logout,
+    loading
   };
   return (
     <Authcontext.Provider value={authdata}>{children}</Authcontext.Provider>
