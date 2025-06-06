@@ -13,16 +13,32 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    createUserbyMail(data?.email,data.password)
-    .then((res) => {
-      console.log(res);
-      alert('user created')
-    })
-    
-    
-  }
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      //this is create firebase registration
+      const res = await createUserbyMail(data?.email, data.password);
+      console.log("User created via auth service:", res);
+      const alldata = {...data,role:"patient"}
+      const response = await fetch("http://localhost:7000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(alldata),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save user to DB");
+      }
+
+      alert("User created and saved to DB");
+      console.log("DB response:", await response.json(), response);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -47,8 +63,7 @@ const RegisterPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="mt-8 space-y-6 bg-white p-8 rounded-xl shadow-lg"
         >
-          {/* ... */}
-
+          {/*name div*/}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               {...register("firstName", { required: true })}
@@ -63,7 +78,7 @@ const RegisterPage = () => {
               placeholder="Enter your last name"
             />
           </div>
-
+          {/* email div */}
           <div className="mb-4">
             <input
               {...register("email", { required: true })}
@@ -72,7 +87,7 @@ const RegisterPage = () => {
               placeholder="Enter your email address"
             />
           </div>
-
+          {/* phone div */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               {...register("phone", { required: true })}
@@ -86,7 +101,7 @@ const RegisterPage = () => {
               className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-
+          {/* passward div */}
           <div className="relative">
             <input
               {...register("password", { required: true, minLength: 6 })}

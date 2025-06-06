@@ -1,26 +1,26 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 
 const HealthcareNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {user,logout} = useAuth();
-  const navigate = useNavigate()
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
   //logut function
   const handleLogout = () => {
-    logout()
-    .then((res) => {
+    logout().then((res) => {
       console.log(res);
-      alert("logout successfully")
-      navigate('/login')
-    })
-  } 
+      alert("logout successfully");
+      navigate("/login");
+    });
+  };
   console.log(user);
-  
-  return (    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
+
+  return (
+    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mother div or container of desktop navigation menu */}
         <div className="flex justify-between items-center h-16">
@@ -45,10 +45,13 @@ const HealthcareNavbar = () => {
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/login">Login</Link>
+            <button
+              onClick={handleLogout}
+              className="hidden md:flex items-center space-x-4"
+            >
+              Logout
+            </button> 
           </div>
-          <button onClick={handleLogout} className="hidden md:flex items-center space-x-4">
-           Logout
-          </button>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
