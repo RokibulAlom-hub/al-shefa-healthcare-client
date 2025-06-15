@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import useRole from "../Hooks/useRole";
 
 const Dashnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
+  const {role} = useRole()
   const navigate = useNavigate();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -12,12 +14,12 @@ const Dashnav = () => {
   //logut function
   const handleLogout = () => {
     logout().then((res) => {
-      console.log(res);
+      // console.log(res);
       alert("logout successfully");
       navigate("/login");
     });
   };
-  console.log(user);
+  // console.log(user);
 
   return (
     <nav className="bg-white shadow-lg border-b-2 border-blue-100">
@@ -38,7 +40,27 @@ const Dashnav = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/">Home</NavLink>
+             {
+              role === "admin" && (
+                <>
+                <NavLink to="/dash/admin">Alluser</NavLink>
+                </>
+              )
+             }
+             {
+              role === "doctor" && (
+                <>
+                <NavLink to="/dash/doctor">Appoinment</NavLink>
+                </>
+              )
+             }
+             {
+              role === "patient" && (
+                <>
+                <NavLink to="/dash/patient">Myhistory</NavLink>
+                </>
+              )
+             }
           </div>
 
           {/* Desktop CTA Buttons */}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Heart, Eye, EyeOff, Mail, Lock, Phone, Calendar } from "lucide-react";
 import useAuth from "../Hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,7 +13,7 @@ const RegisterPage = () => {
 
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate()
   const onSubmit = async (data) => {
     try {
       console.log(data);
@@ -34,6 +35,7 @@ const RegisterPage = () => {
 
       alert("User created and saved to DB");
       console.log("DB response:", await response.json(), response);
+      navigate("/")
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong");

@@ -12,12 +12,12 @@ const HealthcareNavbar = () => {
   //logut function
   const handleLogout = () => {
     logout().then((res) => {
-      console.log(res);
+      // console.log(res);
       alert("logout successfully");
       navigate("/login");
     });
   };
-  console.log(user);
+  // console.log(user);
 
   return (
     <nav className="bg-white shadow-lg border-b-2 border-blue-100">
@@ -38,7 +38,8 @@ const HealthcareNavbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/dash">Dashboard</NavLink>
           </div>
 
           {/* Desktop CTA Buttons */}
