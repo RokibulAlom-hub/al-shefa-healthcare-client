@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 
-const HealthcareNavbar = () => {
+const Dashnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const HealthcareNavbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/">Home</NavLink>
           </div>
 
           {/* Desktop CTA Buttons */}
@@ -66,22 +66,14 @@ const HealthcareNavbar = () => {
         {/*Mother div or container of Mobile Navigation Menu */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t grid grid-cols-1">
-              <NavLink to="/dashboard">Dashboard</NavLink>
-
-              {/* Mobile CTA Buttons */}
-              {user?.email ? (
-                <button
+            <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col">
+              <NavLink>Home</NavLink>
+              <button
                   onClick={handleLogout}
                   className="md:hidden  space-x-4"
                 >
                   Logout
                 </button>
-              ) : (
-                <div className="pt-4 border-t border-gray-200 space-y-2">
-                  <Link to="/login">Login</Link>
-                </div>
-              )}
             </div>
           </div>
         )}
@@ -89,4 +81,4 @@ const HealthcareNavbar = () => {
     </nav>
   );
 };
-export default HealthcareNavbar;
+export default Dashnav;

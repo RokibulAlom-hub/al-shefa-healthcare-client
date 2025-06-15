@@ -12,8 +12,8 @@ import { auth } from "../Firebase/Firebase.init";
 // creating authcontext for global access
 export const Authcontext = createContext(null);
 const Authprovider = ({ children }) => {
-    const [user,setUser] = useState(null);
-    const [loading,setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
 
   //create user
@@ -22,9 +22,9 @@ const Authprovider = ({ children }) => {
   };
 
   // user login by email password
-  const userLogin = (email,password) => {
-    return signInWithEmailAndPassword(auth,email,password)
-  }
+  const userLogin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   //    google Login
   const googleLogin = () => {
     return signInWithPopup(auth, googleProvider);
@@ -35,22 +35,41 @@ const Authprovider = ({ children }) => {
   };
   //observer settings
   useEffect(() => {
-    const unsubscriber = onAuthStateChanged(auth,(currentUser) =>{
-       setUser(currentUser)
-    //    console.log('observer is watching you', currentUser);
-    setLoading(false)
-    })
+    const unsubscriber = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      //    console.log('observer is watching you', currentUser);
+      //settings jwt web token
+      if (currentUser?.email) {
+        const jwtUser = { email: currentUser?.email };
+        fetch("http://localhost:7000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // This is how you include cookies
+          body: JSON.stringify(jwtUser),
+        })
+          .then((res) => res.json())
+           // Convert the response to JSON
+          .then((data) => {
+            console.log(data); // This is where your response data is
+          });
+          
+          
+      }
+      setLoading(false);
+    });
     return () => {
-        unsubscriber()
-    }
-  },[])
+      unsubscriber();
+    };
+  }, []);
   const authdata = {
     user,
     googleLogin,
     createUserbyMail,
     userLogin,
     logout,
-    loading
+    loading,
   };
   return (
     <Authcontext.Provider value={authdata}>{children}</Authcontext.Provider>
