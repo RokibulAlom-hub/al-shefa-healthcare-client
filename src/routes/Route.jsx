@@ -9,6 +9,9 @@ import Home from "../Pages/Homepages/Home";
 import Appoinment from "../Pages/DashboardPages/Doctor/Appoinment";
 import Alluser from "../Pages/DashboardPages/Admin/Alluser";
 import Myhistory from "../Pages/DashboardPages/patients/Myhistory";
+import CreateProfile from "../Pages/DashboardPages/Admin/CreateProfile";
+import Doctors from "../Pages/DashboardPages/Admin/Doctors";
+import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacist";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -40,17 +43,22 @@ export const router = createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
-                path:"/dash/doctor",
-                element:<Appoinment></Appoinment>
+                path:"/dash/createProfile",
+                element:<CreateProfile></CreateProfile>
+            },
+            {
+                path:"/dash/doctors",
+                element:<Doctors></Doctors>
+            },
+            {
+                path:"/dash/pharmacists",
+                element:<Pharamacist></Pharamacist>
             },
             {
                 path:"/dash/admin",
                 element:<Alluser></Alluser>
             },
-            {
-                path:"/dash/patient",
-                element:<Myhistory></Myhistory>
-            },
+            
         ]
     }  
     

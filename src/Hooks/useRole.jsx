@@ -8,12 +8,17 @@ const useRole = () => {
   const [role, setRole] = useState(null);
   useEffect(() => {
     if (!email) return;
+    const fetchRole =async () => {
     try {
-      const response = axiosSecure.get(`users/${email}`);
+      const response =await axiosSecure.get(`users/${email}`);
+      console.log(response);
+      
       setRole(response?.data?.role);
     } catch (error) {
       console.error("Failed to fetch user role:", error);
     }
+    }
+    fetchRole()
   }, [email, axiosSecure]);
   return { role };
 };

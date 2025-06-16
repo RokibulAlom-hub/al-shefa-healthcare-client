@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Eye, EyeOff, Mail, Lock, Phone, Calendar } from "lucide-react";
+import { Heart, Eye, EyeOff} from "lucide-react";
 import useAuth from "../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const RegisterPage = () => {
       if (!response.ok) {
         throw new Error("Failed to save user to DB");
       }
-
       alert("User created and saved to DB");
       console.log("DB response:", await response.json(), response);
       navigate("/");
