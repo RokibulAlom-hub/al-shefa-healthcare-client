@@ -3,39 +3,34 @@ import { Heart, Eye, EyeOff, Mail, Lock, Phone, Calendar } from "lucide-react";
 import useAuth from "../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { createUserbyMail } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
 
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
       console.log(data);
       //this is create firebase registration
       const res = await createUserbyMail(data?.email, data.password);
       console.log("User created via auth service:", res);
-      const alldata = {...data,role:"patient"}
-      const response = await fetch("http://localhost:7000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(alldata),
-      });
-
+      const alldata = { ...data, role: "patient" };
+      const response = await axiosPublic.post(`/users`, alldata);
       if (!response.ok) {
         throw new Error("Failed to save user to DB");
       }
 
       alert("User created and saved to DB");
       console.log("DB response:", await response.json(), response);
-      navigate("/")
+      navigate("/");
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong");
