@@ -6,12 +6,11 @@ import Privateroute from "./Privateroute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import ErrorPage from "../Pages/Error/error-page";
 import Home from "../Pages/Homepages/Home";
-import Appoinment from "../Pages/DashboardPages/Doctor/Appoinment";
 import Alluser from "../Pages/DashboardPages/Admin/Alluser";
-import Myhistory from "../Pages/DashboardPages/patients/Myhistory";
 import CreateProfile from "../Pages/DashboardPages/Admin/CreateProfile";
 import Doctors from "../Pages/DashboardPages/Admin/Doctors";
 import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacist";
+import Appoinment from "../Pages/DashboardPages/Admin/Appoinment";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -53,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path:"/dash/pharmacists",
                 element:<Pharamacist></Pharamacist>
+            },
+            {
+                path:"/dash/appoinments",
+                element:<Appoinment></Appoinment>
             },
             {
                 path:"/dash/admin",

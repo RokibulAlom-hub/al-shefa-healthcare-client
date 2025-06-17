@@ -47,6 +47,7 @@ const Dashnav = () => {
                 <NavLink to="/dash/createProfile">CreateProfile</NavLink>
                 <NavLink to="/dash/doctors">Doctors</NavLink>
                 <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
+                <NavLink to="/dash/appoinments">Appoinments</NavLink>
                 </>
               )
              }

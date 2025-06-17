@@ -15,7 +15,7 @@ const Doctors = () => {
   if (!doctors) {
     return <div className="p-4">Loading...</div>;
   }
-console.log(doctors);
+// console.log(doctors);
 
   return (
     <div className="p-4">

@@ -15,7 +15,7 @@ const Pharamacist = () => {
   if (!pharamacists) {
     return <div className="p-4">Loading...</div>;
   }
-console.log(pharamacists);
+// console.log(pharamacists);
 
   return (
     <div className="p-4">
