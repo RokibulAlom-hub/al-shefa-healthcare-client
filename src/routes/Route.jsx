@@ -11,6 +11,7 @@ import CreateProfile from "../Pages/DashboardPages/Admin/CreateProfile";
 import Doctors from "../Pages/DashboardPages/Admin/Doctors";
 import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacist";
 import Appoinment from "../Pages/DashboardPages/Admin/Appoinment";
+import Orders from "../Pages/DashboardPages/Admin/Orders";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
             {
                 path:"/dash/appoinments",
                 element:<Appoinment></Appoinment>
+            },
+            {
+                path:"/dash/orders",
+                element:<Orders></Orders>
             },
             {
                 path:"/dash/admin",

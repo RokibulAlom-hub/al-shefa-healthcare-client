@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Alluser = () => {
-  const [users, setUsers] = useState(null);
   const axiosSecure = useAxiosSecure();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axiosSecure.get("/users");
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Error occurred:", error);
-      }
-    };
-    fetchUsers();
-  }, [axiosSecure]);
+
+  const {
+    data: allUsers,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["allUsers"],
+    queryFn: async () => {
+      const response = await axiosSecure.get("/users");
+      return response.data;
+    },
+  });
   //role change update operation
   const handleRoleChange = async (userId, newRole) => {
     try {
-      const response = await axiosSecure.patch(`/update-role/${userId}`);
-      if (response.ok) {
-        setUsers(
-          users.map((user) =>
-            user?._id === userId ? { ...user, role: newRole } : user
-          )
-        );
+      const response = await axiosSecure.patch(`/update-role/${userId}`, {
+        newRole,
+      });
+      if (response.status === 200) {
+       refetch()
       } else {
         console.error("Failed to update role");
       }
@@ -33,13 +32,12 @@ const Alluser = () => {
     }
   };
 
-  if (!users) {
-    return <div className="p-4">Loading...</div>;
-  }
+  if (isLoading) return <div className="p-4">Loading...</div>;
+  if (error) return <div className="p-4">Error loading appointments</div>;
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">All Users ({users.length})</h2>
+      <h2 className="text-2xl font-bold mb-4">All Users ({allUsers.length})</h2>
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
@@ -54,7 +52,7 @@ const Alluser = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {allUsers.map((user, index) => (
               <tr key={index} className="hover:bg-gray-50">
                 <td className="border border-gray-300 p-3">{index + 1}</td>
                 <td className="border border-gray-300 p-3">
@@ -84,7 +82,7 @@ const Alluser = () => {
 
       {/* Mobile Cards */}
       <div className="md:hidden space-y-4">
-        {users.map((user, index) => (
+        {allUsers.map((user, index) => (
           <div
             key={index}
             className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm"

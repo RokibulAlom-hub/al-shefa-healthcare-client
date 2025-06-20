@@ -48,6 +48,7 @@ const Dashnav = () => {
                 <NavLink to="/dash/doctors">Doctors</NavLink>
                 <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
                 <NavLink to="/dash/appoinments">Appoinments</NavLink>
+                <NavLink to="/dash/orders">Orders</NavLink>
                 </>
               )
              }
