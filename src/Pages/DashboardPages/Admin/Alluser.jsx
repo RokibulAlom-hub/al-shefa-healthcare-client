@@ -1,5 +1,6 @@
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import UserCard from "./Desktoptable/UserCard.jsx";
 
 const Alluser = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,7 +18,7 @@ const Alluser = () => {
     },
   });
   //role change update operation
-  const handleRoleChange = async (userId, newRole) => {
+  const updateRoleChange = async (userId, newRole) => {
     try {
       const response = await axiosSecure.patch(`/update-role/${userId}`, {
         newRole,
@@ -31,7 +32,10 @@ const Alluser = () => {
       console.error("Error updating role:", error);
     }
   };
-
+  //this will be table head dynamic value 
+  const tableHeadValue = {
+    name:"Name", email:"Email", phone:"Phone" , role:"Role"
+  }
   if (isLoading) return <div className="p-4">Loading...</div>;
   if (error) return <div className="p-4">Error loading appointments</div>;
 
@@ -41,47 +45,13 @@ const Alluser = () => {
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-3 text-left">#</th>
-              <th className="border border-gray-300 p-3 text-left">Name</th>
-              <th className="border border-gray-300 p-3 text-left">Email</th>
-              <th className="border border-gray-300 p-3 text-left">Phone</th>
-              <th className="border border-gray-300 p-3 text-left">Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUsers.map((user, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-3">{index + 1}</td>
-                <td className="border border-gray-300 p-3">
-                  {user?.firstName}
-                </td>
-                <td className="border border-gray-300 p-3">{user?.email}</td>
-                <td className="border border-gray-300 p-3">{user?.phone}</td>
-                <td className="border border-gray-300 p-3">
-                  <select
-                    value={user?.role}
-                    onChange={(e) =>
-                      handleRoleChange(user?._id, e.target.value)
-                    }
-                    className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="patient">Patient</option>
-                    <option value="pharmasict">Pharmasicts</option>
-                  </select>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <UserCard allUsers={allUsers} onRolechange={(userId, newRole) => {
+                updateRoleChange(userId,newRole)
+        }} tableHeadValue={tableHeadValue}/>
       </div>
 
       {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
+      {/* <div className="md:hidden space-y-4">
         {allUsers.map((user, index) => (
           <div
             key={index}
@@ -116,7 +86,7 @@ const Alluser = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

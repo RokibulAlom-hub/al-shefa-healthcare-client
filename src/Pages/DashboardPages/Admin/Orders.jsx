@@ -1,5 +1,6 @@
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import OrdersCard from "./Desktoptable/OrdersCard";
 
 const Orders = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,7 +18,7 @@ const Orders = () => {
     },
   });
   //status change update operation
-  const handleStatusChange = async (orderId, newStatus) => {
+  const updateStatusChange = async (orderId, newStatus) => {
     try {
       const response = await axiosSecure.patch(`/orderMedi/${orderId}`, {
         newStatus,
@@ -34,7 +35,12 @@ const Orders = () => {
 
   if (isLoading) return <div className="p-4">Loading...</div>;
   if (error) return <div className="p-4">Error loading appointments</div>;
-
+  const tableHeadValue = {
+    CustomerName: "CustomerName",
+    OrderDate: "OrderDate",
+    DeliveryAddress: "DeliveryAddress",
+    Status: "Status",
+  };
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">
@@ -43,57 +49,17 @@ const Orders = () => {
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-3 text-left">#</th>
-              <th className="border border-gray-300 p-3 text-left">
-                CustomerName
-              </th>
-              <th className="border border-gray-300 p-3 text-left">
-                OrderDate
-              </th>
-              <th className="border border-gray-300 p-3 text-left">
-                DeliveryAddress
-              </th>
-              <th className="border border-gray-300 p-3 text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allorders.map((orderData, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-3">{index + 1}</td>
-                <td className="border border-gray-300 p-3">
-                  {orderData?.email}
-                </td>
-                <td className="border border-gray-300 p-3">
-                  {orderData?.orderDate}
-                </td>
-                <td className="border border-gray-300 p-3">
-                  {orderData?.deliveryAddress}
-                </td>
-
-                <td className="border border-gray-300 p-3">
-                  <select
-                    value={orderData?.status}
-                    onChange={(e) =>
-                      handleStatusChange(orderData?._id, e.target.value)
-                    }
-                    className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="Delivered">Delivered</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </select>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <OrdersCard
+          allorders={allorders}
+          onRolechange={(orderId, newStatus) => {
+            updateStatusChange(orderId, newStatus);
+          }}
+          tableHeadValue={tableHeadValue}
+        />
       </div>
 
       {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
+      {/* <div className="md:hidden space-y-4">
         {allorders.map((appoinmentData, index) => (
           <div
             key={index}
@@ -139,7 +105,7 @@ const Orders = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
