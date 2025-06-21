@@ -6,12 +6,12 @@ import Privateroute from "./Privateroute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import ErrorPage from "../Pages/Error/error-page";
 import Home from "../Pages/Homepages/Home";
-import Alluser from "../Pages/DashboardPages/Admin/Alluser";
 import CreateProfile from "../Pages/DashboardPages/Admin/CreateProfile";
-import Doctors from "../Pages/DashboardPages/Admin/Doctors";
-import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacist";
-import Appoinment from "../Pages/DashboardPages/Admin/Appoinment";
-import Orders from "../Pages/DashboardPages/Admin/Orders";
+import Doctors from "../Pages/DashboardPages/Admin/Doctors/Doctors";
+import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacists/Pharmacist";
+import Appoinment from "../Pages/DashboardPages/Admin/Appoinments/Appoinment";
+import Orders from "../Pages/DashboardPages/Admin/Orders/Orders";
+import Alluser from "../Pages/DashboardPages/Admin/Alluser/Alluser";
 
 export const router = createBrowserRouter([
     // homelayout pages and components

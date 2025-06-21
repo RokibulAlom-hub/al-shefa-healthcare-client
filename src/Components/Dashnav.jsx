@@ -6,7 +6,7 @@ import useRole from "../Hooks/useRole";
 const Dashnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
-  const {role} = useRole()
+  const { role } = useRole();
   const navigate = useNavigate();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,7 +14,7 @@ const Dashnav = () => {
   //logut function
   const handleLogout = () => {
     logout().then((res) => {
-      // console.log(res);
+      console.log(res);
       alert("logout successfully");
       navigate("/login");
     });
@@ -40,32 +40,36 @@ const Dashnav = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-             {
-              role === "admin" && (
-                <>
+            {role === "admin" && (
+              <>
                 <NavLink to="/dash/admin">Alluser</NavLink>
                 <NavLink to="/dash/createProfile">CreateProfile</NavLink>
                 <NavLink to="/dash/doctors">Doctors</NavLink>
                 <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
                 <NavLink to="/dash/appoinments">Appoinments</NavLink>
                 <NavLink to="/dash/orders">Orders</NavLink>
-                </>
-              )
-             }
-             {
-              role === "doctor" && (
-                <>
-                <NavLink to="/dash/doctor">Appoinment</NavLink>
-                </>
-              )
-             }
-             {
-              role === "patient" && (
-                <>
-                <NavLink to="/dash/patient">Myhistory</NavLink>
-                </>
-              )
-             }
+              </>
+            )}
+            {role === "doctor" && (
+              <>
+                <NavLink to="/dash/doctor">Appoinments</NavLink>
+                <NavLink to="/dash/dProfile">Myprofile</NavLink>
+                <NavLink to="/dash/appoinHistory">Allappoinments</NavLink>
+              </>
+            )}
+            {role === "patient" && (
+              <>
+                <NavLink to="/dash/patient">MyRecords</NavLink>
+                <NavLink to="/dash/mdetails">Mydetails</NavLink>
+              </>
+            )}
+            {role === "pharmasict" && (
+              <>
+                <NavLink to="/dash/orders">Orders</NavLink>
+                <NavLink to="/dash/addmedicine">AddMedicine</NavLink>
+                <NavLink to="/dash/medicine">AllMedicine</NavLink>
+              </>
+            )}
           </div>
 
           {/* Desktop CTA Buttons */}
@@ -94,13 +98,51 @@ const Dashnav = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col">
-              <NavLink>Home</NavLink>
-              <button
-                  onClick={handleLogout}
-                  className="md:hidden  space-x-4"
-                >
-                  Logout
-                </button>
+              {
+                //this is admin navigation for mobile
+                role === "admin" && (
+                  <>
+                    <NavLink to="/dash/admin">Alluser</NavLink>
+                    <NavLink to="/dash/createProfile">CreateProfile</NavLink>
+                    <NavLink to="/dash/doctors">Doctors</NavLink>
+                    <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
+                    <NavLink to="/dash/appoinments">Appoinments</NavLink>
+                    <NavLink to="/dash/orders">Orders</NavLink>
+                  </>
+                )
+              }
+              {
+                // doctor naviagtion menu for mobile
+                role === "doctor" && (
+                  <>
+                    <NavLink to="/dash/doctor">Appoinments</NavLink>
+                    <NavLink to="/dash/dProfile">Myprofile</NavLink>
+                    <NavLink to="/dash/appoinHistory">Allappoinments</NavLink>
+                  </>
+                )
+              }
+              {
+                //patient mobile menu
+                role === "patient" && (
+                  <>
+                    <NavLink to="/dash/patient">MyRecords</NavLink>
+                    <NavLink to="/dash/mdetails">Mydetails</NavLink>
+                  </>
+                )
+              }
+              {
+                //pharmasict mobile menu
+                role === "pharmasict" && (
+                  <>
+                    <NavLink to="/dash/orders">Orders</NavLink>
+                    <NavLink to="/dash/addmedicine">AddMedicine</NavLink>
+                    <NavLink to="/dash/medicine">AllMedicine</NavLink>
+                  </>
+                )
+              }
+              <button onClick={handleLogout} className="md:hidden  space-x-4">
+                Logout
+              </button>
             </div>
           </div>
         )}
