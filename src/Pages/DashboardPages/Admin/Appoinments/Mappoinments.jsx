@@ -44,7 +44,7 @@ const Mappoinments = ({ appoinments, onRolechange }) => {
                 }
                 className="ml-2 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="Scheduled">Scheduled</option>
+                <option value="Confirmed">Confirmed</option>
                 <option value="Pending">Pending</option>
                 <option value="Cancelled">Cancelled</option>
               </select>

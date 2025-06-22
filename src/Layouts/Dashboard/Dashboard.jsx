@@ -9,7 +9,7 @@ const Dashboard = () => {
     console.log(role);
     useEffect(() => {
     if (role === "doctor") {
-      navigate("/dash/doctor");
+      navigate("/dash/doctorAppoinments");
     }
     if (role === "admin") {
       navigate("/dash/admin");

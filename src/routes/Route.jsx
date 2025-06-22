@@ -12,6 +12,9 @@ import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacists/Pharmacist";
 import Appoinment from "../Pages/DashboardPages/Admin/Appoinments/Appoinment";
 import Orders from "../Pages/DashboardPages/Admin/Orders/Orders";
 import Alluser from "../Pages/DashboardPages/Admin/Alluser/Alluser";
+import DoctorAppoinmentList from "../Pages/DashboardPages/Doctor/DoctorAppoinmentList";
+import Dprofile from "../Pages/DashboardPages/Doctor/Dprofile";
+import CurrentAppoinments from "../Pages/DashboardPages/Doctor/CurrentAppoinments";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -66,7 +69,19 @@ export const router = createBrowserRouter([
                 path:"/dash/admin",
                 element:<Alluser></Alluser>
             },
-            
+            //from here doctors route has been started
+            {
+                path:"/dash/doctorAppoinments",
+                element:<DoctorAppoinmentList/>
+            },
+            {
+                path:"/dash/appointmentRecord",
+                element:<CurrentAppoinments></CurrentAppoinments>
+            },
+            {
+                path:"/dash/dProfile",
+                element:<Dprofile/>
+            }
         ]
     }  
     

@@ -52,9 +52,9 @@ const Dashnav = () => {
             )}
             {role === "doctor" && (
               <>
-                <NavLink to="/dash/doctor">Appoinments</NavLink>
+                <NavLink to="/dash/doctorAppoinments">Allappoinments</NavLink>
                 <NavLink to="/dash/dProfile">Myprofile</NavLink>
-                <NavLink to="/dash/appoinHistory">Allappoinments</NavLink>
+                <NavLink to="/dash/appointmentRecord">CurrentAppoinment</NavLink>
               </>
             )}
             {role === "patient" && (
@@ -115,7 +115,7 @@ const Dashnav = () => {
                 // doctor naviagtion menu for mobile
                 role === "doctor" && (
                   <>
-                    <NavLink to="/dash/doctor">Appoinments</NavLink>
+                    <NavLink to="/dash/doctorAppoinments">Appoinments</NavLink>
                     <NavLink to="/dash/dProfile">Myprofile</NavLink>
                     <NavLink to="/dash/appoinHistory">Allappoinments</NavLink>
                   </>

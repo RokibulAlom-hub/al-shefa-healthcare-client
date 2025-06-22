@@ -4,7 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 import AppoinmentCard from "../Admin/Appoinments/AppoinmentCard";
 import Mappoinments from "../Admin/Appoinments/Mappoinments";
 
-const DoctorAppoinmentList = () => {
+const CurrentAppoinments = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const {
@@ -16,7 +16,7 @@ const DoctorAppoinmentList = () => {
     queryKey: ["doctorAppoinment"],
     queryFn: async () => {
       const response = await axiosSecure.get(
-        `/appoinments?email=${user?.email}`
+        `/appoinments/unconfirmed?email=${user?.email}`
       );
       console.log(response);
 
@@ -81,4 +81,4 @@ const DoctorAppoinmentList = () => {
   );
 };
 
-export default DoctorAppoinmentList;
+export default CurrentAppoinments;
