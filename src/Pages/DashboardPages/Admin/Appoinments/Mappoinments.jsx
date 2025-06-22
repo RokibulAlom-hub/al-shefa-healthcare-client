@@ -20,23 +20,23 @@ const Mappoinments = ({ appoinments, onRolechange }) => {
               <span className="font-medium">#:</span> {index + 1}
             </div>
             <div>
-              <span className="font-medium">Email:</span>{" "}
+              <span className="font-medium">Patient:</span>{" "}
               {appoinmentData?.patientName}
             </div>
             <div>
-              <span className="font-medium">Phone:</span>{" "}
+              <span className="font-medium">Doctor:</span>{" "}
               {appoinmentData?.doctorName}
             </div>
             <div>
-              <span className="font-medium">Phone:</span>{" "}
+              <span className="font-medium">Date:</span>{" "}
               {appoinmentData?.appointmentDate}
             </div>
             <div>
-              <span className="font-medium">Phone:</span>{" "}
+              <span className="font-medium">Time:</span>{" "}
               {appoinmentData?.appointmentTime}
             </div>
             <div>
-              <span className="font-medium">Role:</span>
+              <span className="font-medium">Status:</span>
               <select
                 value={appoinmentData.status}
                 onChange={(e) =>

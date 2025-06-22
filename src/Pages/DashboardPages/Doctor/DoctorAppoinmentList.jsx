@@ -19,7 +19,6 @@ const DoctorAppoinmentList = () => {
         `/appoinments?email=${user?.email}`
       );
       console.log(response);
-
       return response?.data;
     },
   });

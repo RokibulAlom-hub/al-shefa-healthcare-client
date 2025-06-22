@@ -15,6 +15,8 @@ import Alluser from "../Pages/DashboardPages/Admin/Alluser/Alluser";
 import DoctorAppoinmentList from "../Pages/DashboardPages/Doctor/DoctorAppoinmentList";
 import Dprofile from "../Pages/DashboardPages/Doctor/Dprofile";
 import CurrentAppoinments from "../Pages/DashboardPages/Doctor/CurrentAppoinments";
+import Addmedicine from "../Pages/DashboardPages/Pharmasicts/Addmedicine";
+import MedicineList from "../Pages/DashboardPages/Pharmasicts/MedicineList";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -76,11 +78,20 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/dash/appointmentRecord",
-                element:<CurrentAppoinments></CurrentAppoinments>
+                element:<CurrentAppoinments/>
             },
             {
                 path:"/dash/dProfile",
                 element:<Dprofile/>
+            },
+            //from here pharmasicts route has been started
+            {
+                path:"/dash/addmedicine",
+                element:<Addmedicine/>
+            },
+            {
+                path:"/dash/medicine",
+                element:<MedicineList/>
             }
         ]
     }  
