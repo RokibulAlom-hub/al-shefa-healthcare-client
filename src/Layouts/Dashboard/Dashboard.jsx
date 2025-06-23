@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Dashnav from '../../Components/Dashnav';
 import useRole from '../../Hooks/useRole';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Footer from '../../Components/Footer';
 
 const Dashboard = () => {
     const {role} = useRole();
@@ -22,6 +23,7 @@ const Dashboard = () => {
         <div>
             <Dashnav></Dashnav>
             <Outlet></Outlet>
+            <Footer/>
         </div>
     );
 };
