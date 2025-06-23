@@ -40,6 +40,7 @@ const Dashnav = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
+             <NavLink to="/">Home</NavLink>
             {role === "admin" && (
               <>
                 <NavLink to="/dash/admin">Alluser</NavLink>
