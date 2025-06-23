@@ -59,8 +59,8 @@ const Dashnav = () => {
             )}
             {role === "patient" && (
               <>
-                <NavLink to="/dash/patient">MyRecords</NavLink>
-                <NavLink to="/dash/mdetails">Mydetails</NavLink>
+                <NavLink to="/dash/patient">Appoinments</NavLink>
+                <NavLink to="/dash/myorders">Orders</NavLink>
               </>
             )}
             {role === "pharmasict" && (

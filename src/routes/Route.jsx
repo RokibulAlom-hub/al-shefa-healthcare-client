@@ -17,6 +17,8 @@ import Dprofile from "../Pages/DashboardPages/Doctor/Dprofile";
 import CurrentAppoinments from "../Pages/DashboardPages/Doctor/CurrentAppoinments";
 import Addmedicine from "../Pages/DashboardPages/Pharmasicts/Addmedicine";
 import MedicineList from "../Pages/DashboardPages/Pharmasicts/MedicineList";
+import MyAppoinment from "../Pages/DashboardPages/patients/MyAppoinment.jsx";
+import Myorders from "../Pages/DashboardPages/patients/Myorders.jsx";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -92,6 +94,16 @@ export const router = createBrowserRouter([
             {
                 path:"/dash/medicine",
                 element:<MedicineList/>
+            }
+            // from here patiens route has been started
+            ,
+            {
+                path:"/dash/patient",
+                element:<MyAppoinment/>
+            },
+            {
+                path:"/dash/myorders",
+                element:<Myorders></Myorders>
             }
         ]
     }  
