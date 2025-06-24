@@ -5,7 +5,7 @@ import LoginPage from "../AuthFiles/Login";
 import Privateroute from "./Privateroute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import ErrorPage from "../Pages/Error/error-page";
-import Home from "../Pages/Homepages/Home";
+import Home from "../Pages/LandingPages/Home.jsx";
 import CreateProfile from "../Pages/DashboardPages/Admin/CreateProfile";
 import Doctors from "../Pages/DashboardPages/Admin/Doctors/Doctors";
 import Pharamacist from "../Pages/DashboardPages/Admin/Pharmacists/Pharmacist";
@@ -19,6 +19,8 @@ import Addmedicine from "../Pages/DashboardPages/Pharmasicts/Addmedicine";
 import MedicineList from "../Pages/DashboardPages/Pharmasicts/MedicineList";
 import MyAppoinment from "../Pages/DashboardPages/patients/MyAppoinment.jsx";
 import Myorders from "../Pages/DashboardPages/patients/Myorders.jsx";
+import AllDoctorsToShow from "../Pages/HomeLayoutPages/Showdoctors/AllDoctorsToShow.jsx";
+import Appoinments from "../Pages/HomeLayoutPages/Appoinments/Appoinments.jsx";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -38,6 +40,15 @@ export const router = createBrowserRouter([
             {
                 path:'/login',
                 element:<LoginPage></LoginPage>
+            },
+             //from here homelayout pages has been started
+            {
+                path:"/ourDoctors",
+                element:<AllDoctorsToShow/>
+            },
+            {
+                path:"/appoinment/:_id",
+                element:<Appoinments/>
             },
         ]
     },
@@ -104,7 +115,7 @@ export const router = createBrowserRouter([
             {
                 path:"/dash/myorders",
                 element:<Myorders></Myorders>
-            }
+            },
         ]
     }  
     

@@ -11,14 +11,31 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }, // Not used since you don’t want to show errors
+    setValue, // ← ADD THIS
   } = useForm();
+
+  //prefill funtions
+  const handlePrefill = (role) => {
+    const credentials = {
+      admin: {email:"rokibbhai@gmail.com",password:"Pa$$w0rd!"},
+      doctor: {email:"farukDoc@gmail.com",password:"Pa$$w0rd!"},
+      pharmasicts: {email:"miyadVai@gamil.com",password:"Pa$$w0rd!"},
+      patient: {email:"prabirDada@gmail.com",password:"Pa$$w0rd!"},
+    }
+  
+     const userCred = credentials[role];
+     if (userCred) {
+      setValue("email",userCred.email)
+      setValue("password",userCred.password)
+     }
+  
+  }
 
   const onSubmit = (data) => {
     // Add your login logic here
     userLogin(data?.email,data?.password)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       alert('user logged in')
     })
     .catch((error) => {
@@ -38,6 +55,37 @@ const LoginPage = () => {
         <h2 className="mt-6 text-3xl text-center font-extrabold text-gray-900">
           Welcome Back
         </h2>
+        <div className="flex justify-center items-center gap-4 mb-4">
+          <h1 className="font-bold">Log in as a</h1>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
+            onClick={() => handlePrefill("admin")}
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
+            onClick={() => handlePrefill("doctor")}
+          >
+            Doctor
+          </button>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
+            onClick={() => handlePrefill("pharmasicts")}
+          >
+            Pharmasicts
+          </button>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
+            onClick={() => handlePrefill("patient")}
+          >
+           Patient
+          </button>
+        </div>
 
         {/* Login Form */}
         <form

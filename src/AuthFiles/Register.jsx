@@ -18,17 +18,17 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
       //this is create firebase registration
       const res = await createUserbyMail(data?.email, data.password);
-      console.log("User created via auth service:", res);
+      // console.log("User created via auth service:", res);
       const alldata = { ...data, role: "patient" };
       const response = await axiosPublic.post(`/users`, alldata);
       if (!response.ok) {
         throw new Error("Failed to save user to DB");
       }
       alert("User created and saved to DB");
-      console.log("DB response:", await response.json(), response);
+      // console.log("DB response:", await response.json(), response);
       navigate("/");
     } catch (error) {
       console.error("Error:", error);

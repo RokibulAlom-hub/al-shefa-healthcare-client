@@ -52,7 +52,7 @@ const Authprovider = ({ children }) => {
           .then((res) => res.json())
            // Convert the response to JSON
           .then((data) => {
-            console.log(data); // This is where your response data is
+            // console.log(data); // This is where your response data is
           });
           
           

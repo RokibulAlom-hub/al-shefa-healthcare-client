@@ -21,7 +21,7 @@ const MedicineList = () => {
     queryKey: ["getAllmedicine"],
     queryFn: async () => {
       const response = await axiosSecure.get(`/medicine`);
-      console.log(response);
+      // console.log(response);
       return response?.data;
     },
   });

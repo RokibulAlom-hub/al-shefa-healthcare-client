@@ -14,7 +14,7 @@ const Dashnav = () => {
   //logut function
   const handleLogout = () => {
     logout().then((res) => {
-      console.log(res);
+      // console.log(res);
       alert("logout successfully");
       navigate("/login");
     });
@@ -22,17 +22,17 @@ const Dashnav = () => {
   // console.log(user);
 
   return (
-    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-navbar-bg shadow-lg text-navbar-text">
+      <div className="container mx-auto px-4">
         {/* Mother div or container of desktop navigation menu */}
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
           <div className="flex items-center space-x-2">
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-800">
+              <span className="text-xl font-bold ">
                 Al Shefa Healtcare
               </span>
-              <span className="text-xs text-gray-500 text-center">
+              <span className="text-xs  text-center">
                 Your Health Partner
               </span>
             </div>
@@ -41,6 +41,7 @@ const Dashnav = () => {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
              <NavLink to="/">Home</NavLink>
+             <NavLink to="/ourDoctors">Doctors</NavLink>
             {role === "admin" && (
               <>
                 <NavLink to="/dash/admin">Alluser</NavLink>

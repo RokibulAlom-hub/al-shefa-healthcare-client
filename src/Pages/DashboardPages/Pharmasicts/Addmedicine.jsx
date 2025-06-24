@@ -43,7 +43,7 @@ const Addmedicine = () => {
       status: "in stock",
     };
 
-    console.log("Medicine data:", medicineData);
+    // console.log("Medicine data:", medicineData);
     // Add your API call here
     try {
       const response = await axiosSecure.post(`/medicine`, medicineData);

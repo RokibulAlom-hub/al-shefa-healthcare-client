@@ -18,7 +18,7 @@ const CurrentAppoinments = () => {
       const response = await axiosSecure.get(
         `/appoinments/unconfirmed?email=${user?.email}`
       );
-      console.log(response);
+      // console.log(response);
 
       return response?.data;
     },
@@ -32,7 +32,7 @@ const CurrentAppoinments = () => {
         { newStatus }
       );
       if (response.status === 200) {
-        console.log("Status updated:", response.data);
+        // console.log("Status updated:", response.data);
         refetch(); // this will now trigger a fresh data fetch
       } else {
         console.error("Failed to update status");

@@ -7,7 +7,7 @@ import Footer from '../../Components/Footer';
 const Dashboard = () => {
     const {role} = useRole();
     const navigate = useNavigate()
-    console.log(role);
+    // console.log(role);
     useEffect(() => {
     if (role === "doctor") {
       navigate("/dash/doctorAppoinments");

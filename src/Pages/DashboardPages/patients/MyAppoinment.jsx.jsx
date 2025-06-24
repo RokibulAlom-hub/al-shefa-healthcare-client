@@ -31,7 +31,7 @@ const DoctorAppoinmentList = () => {
         { newStatus }
       );
       if (response.status === 200) {
-        console.log("Status updated:", response.data);
+        // console.log("Status updated:", response.data);
         refetch(); // this will now trigger a fresh data fetch
       } else {
         console.error("Failed to update status");
