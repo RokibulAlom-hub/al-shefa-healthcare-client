@@ -20,7 +20,7 @@ import MedicineList from "../Pages/DashboardPages/Pharmasicts/MedicineList";
 import MyAppoinment from "../Pages/DashboardPages/patients/MyAppoinment.jsx";
 import Myorders from "../Pages/DashboardPages/patients/Myorders.jsx";
 import AllDoctorsToShow from "../Pages/HomeLayoutPages/Showdoctors/AllDoctorsToShow.jsx";
-import Appoinments from "../Pages/HomeLayoutPages/Appoinments/Appoinments.jsx";
+import AppointmentBooking from "../Pages/HomeLayoutPages/Appoinments/AppointmentBooking.jsx";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -48,7 +48,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/appoinment/:_id",
-                element:<Appoinments/>
+                element:<Privateroute>
+                    <AppointmentBooking/>
+                </Privateroute>
             },
         ]
     },

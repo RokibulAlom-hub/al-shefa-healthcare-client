@@ -26,10 +26,10 @@ const PappoinCard = ({
                   {appoinmentData?.doctorName}
                 </td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.appointmentDate}
+                  {appoinmentData?.date}
                 </td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.appointmentTime}
+                  {appoinmentData?.time}
                 </td>
                 <td className="border border-gray-300 p-3">
                   {appoinmentData?.status}
