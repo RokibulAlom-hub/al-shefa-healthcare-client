@@ -1,45 +1,59 @@
-import { Heart, ArrowRight } from "lucide-react";
-import bannerImg from "../../assets/bannerImg.jpg"
+import { ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import bannerImg from "../../assets/bannerImg.jpg";
+
 const Banner = () => {
   return (
-    <section className="bg-[#FFF9F5] py-10 relative bg-cover bg-no-repeat " style={{
-          backgroundImage: `url(${bannerImg})`,
-          height: "90vh",
-        }}>
-      <div className="container mx-auto px-4" >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="grid md:grid-cols-2 gap-12 items-center z-20 absolute" >
-          <div>
-            <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
-              Your Health, Our <span className="text-blue-600">Priority</span>
+    <section
+      className="relative bg-section-bg bg-cover bg-no-repeat py-10 sm:py-16 min-h-[70vh] md:min-h-[80vh] flex items-center"
+      style={{ backgroundImage: `url(${bannerImg})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-primary-text bg-opacity-50"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Left Column: Text and Buttons */}
+          <div className="text-center md:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-btn-text mb-4 leading-tight">
+              Your Health, Our <span className="text-link">Priority</span>
             </h1>
-            <p className="text-xl text-white mb-8">
+            <p className="text-base sm:text-lg text-btn-text mb-6 max-w-lg mx-auto md:mx-0">
               Experience world-class healthcare with our expert medical team. We
               provide comprehensive medical services with compassion and
               excellence.
             </p>
-            <div className="flex space-x-4">
-              <button className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg hover:bg-blue-700 transition flex items-center">
-                Book Appointment <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full text-lg hover:bg-blue-600 hover:text-white transition">
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+              <Link
+                to="/dash/appoinments"
+                className="bg-primary-btn text-btn-text px-6 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-hover transition-colors flex items-center justify-center"
+                aria-label="Book Appointment"
+              >
+                Book Appointment <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link
+                to="/ourDoctors"
+                className="border-2 border-primary-btn text-primary-btn px-6 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-primary-btn hover:text-btn-text transition-colors"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
-          {/* <div className="">
-            <div className="bg-white rounded-2xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-300">
-              <div className="bg-blue-100 rounded-xl p-6 mb-4">
-                <Heart className="h-16 w-16 text-blue-600 mx-auto" />
+
+          {/* Rigt column: card */}
+          <div className="hidden md:block">
+            <div className="bg-card-bg rounded-2xl shadow-xl p-6 transform rotate-3 hover:rotate-0 transition-transform duration-300 max-w-sm mx-auto">
+              <div className="bg-section-bg rounded-xl p-4 mb-4">
+                <Heart className="h-12 w-12 text-primary-btn mx-auto" />
               </div>
-              <h3 className="text-2xl font-semibold text-center mb-2">
+              <h3 className="text-xl font-semibold text-primary-text text-center mb-2">
                 24/7 Care
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-secondary-text text-center text-sm">
                 Always here when you need us most
               </p>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>

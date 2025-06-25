@@ -18,6 +18,9 @@ const Dashboard = () => {
     if (role === "patient") {
       navigate("/dash/patient");
     }
+    if (role === "pharmacist") {
+      navigate("/dash/orders");
+    }
   }, [role, navigate]);
     return (
         <div>

@@ -1,101 +1,58 @@
-import { Heart, Users, Phone, Mail, MapPin } from "lucide-react";
+import { Heart, Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const Footer = () => {
+  const links = [
+    { to: "/about", label: "About Us" },
+    { to: "/services", label: "Services" },
+    { to: "/ourDoctors", label: "Doctors" },
+    { to: "/appointments", label: "Appointments" },
+  ];
+  const contactInfo = [
+    { icon: Phone, value: "+1 (555) 123-4567" },
+    { icon: Mail, value: "info@healthcare.com" },
+    { icon: MapPin, value: "123 Medical Center Dr, HC 12345" },
+  ];
+
   return (
-    <footer className="bg-gray-900 text-white py-16">
+    <footer className="bg-navbar-bg py-8 text-primary-text">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <div className="flex items-center space-x-2 mb-6">
-              <Heart className="h-8 w-8 text-blue-400" />
-              <span className="text-2xl font-bold">HealthCare+</span>
+            <div className="flex items-center mb-3">
+              <Heart className="h-6 w-6 text-primary-btn mr-2" aria-hidden="true" />
+              <span className="text-xl font-bold">HealthCare+</span>
             </div>
-            <p className="text-gray-400 mb-6">
-              Providing exceptional healthcare services with compassion and
-              excellence since 2010.
+            <p className="text-sm text-secondary-text">
+              Exceptional healthcare since 2010.
             </p>
-            <div className="flex space-x-4">
-              <div className="bg-blue-600 p-2 rounded-full">
-                <Heart className="h-5 w-5" />
-              </div>
-              <div className="bg-blue-600 p-2 rounded-full">
-                <Users className="h-5 w-5" />
-              </div>
-            </div>
           </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Doctors
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Appointments
-                </a>
-              </li>
+          <nav>
+            <h3 className="text-sm font-semibold mb-3">Quick Links</h3>
+            <ul className="space-y-2 text-sm text-secondary-text">
+              {links.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="hover:text-link transition">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Services</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Emergency Care
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Cardiology
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Family Medicine
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Preventive Care
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Info</h3>
-            <div className="space-y-4 text-gray-400">
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 mr-3 text-blue-400" />
-                <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center">
-                <Mail className="h-5 w-5 mr-3 text-blue-400" />
-                <span>info@healthcare.com</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="h-5 w-5 mr-3 text-blue-400" />
-                <span>123 Medical Center Dr.</span>
-              </div>
+          </nav>
+          <address className="not-italic">
+            <h3 className="text-sm font-semibold mb-3">Contact Info</h3>
+            <div className="space-y-2 text-sm text-secondary-text">
+              {contactInfo.map((item) => (
+                <div key={item.value} className="flex items-center">
+                  <item.icon className="h-4 w-4 text-primary-btn mr-2" aria-hidden="true" />
+                  <span>{item.value}</span>
+                </div>
+              ))}
             </div>
-          </div>
+          </address>
         </div>
-
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 HealthCare+. All rights reserved.</p>
+        <div className="border-t border-border mt-6 pt-4 text-center text-sm text-secondary-text">
+          © 2025 HealthCare+. All rights reserved.
         </div>
       </div>
     </footer>

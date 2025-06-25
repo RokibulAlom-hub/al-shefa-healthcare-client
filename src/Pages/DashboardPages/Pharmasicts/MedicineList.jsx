@@ -26,7 +26,6 @@ const MedicineList = () => {
     },
   });
 
-
   // for filter the data by status and name
   const filteredMedicines = medicines?.filter((item ) => {
     // first for searching 
@@ -81,7 +80,7 @@ const MedicineList = () => {
                 <Pill className="w-8 h-8 text-blue-600" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-xl md:text-3xl font-bold text-gray-900">
                   Medicine Inventory
                 </h1>
                 <p className="text-gray-600">Manage and view all medicines</p>

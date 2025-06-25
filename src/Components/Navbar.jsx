@@ -1,92 +1,120 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import { Menu, X } from "lucide-react";
 
 const HealthcareNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  //logut function
-  const handleLogout = () => {
-    logout().then((res) => {
-      // console.log(res);
-      alert("logout successfully");
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+     alert.success("Logged out successfully");
       navigate("/login");
-    });
+      setIsOpen(false);
+    } catch (error) {
+      alert.error("Logout failed");
+    }
   };
-  // console.log(user);
+
+  const navLinkClass = ({ isActive }) =>
+    `text-sm font-medium transition-colors ${
+      isActive ? "text-link underline" : "text-navbar-text"
+    } hover:text-hover`;
+
+  const links = [
+    { to: "/", label: "Home" },
+    ...(user?.email ? [{ to: "/dash", label: "Dashboard" }] : []),
+    { to: "/ourDoctors", label: "Doctors" },
+    { to: "/medicinestore", label: "Medicine Store" },
+  ];
 
   return (
-    <nav className="bg-white shadow-lg border-b-2 border-blue-100">
+    <nav className="bg-navbar-bg shadow-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mother div or container of desktop navigation menu */}
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
-          <div className="flex items-center space-x-2">
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-800">
-                Al Shefa Healtcare
-              </span>
-              <span className="text-xs text-gray-500 text-center">
-                Your Health Partner
-              </span>
-            </div>
+          {/* Logo */}
+          <div className="flex flex-col">
+            <span className="text-lg font-bold text-primary-text">Al Shefa Healthcare</span>
+            <span className="text-xs text-secondary-text">Your Health Partner</span>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/dash">Dashboard</NavLink>
-            <NavLink to="/ourDoctors">Doctors</NavLink>
-            <NavLink to="/medicinestore">MedicineStore</NavLink>
-          </div>
-
-          {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center space-x-6">
+            {links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={navLinkClass}
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
+              >
+                {link.label}
+              </NavLink>
+            ))}
             {user?.email ? (
               <button
                 onClick={handleLogout}
-                className="hidden md:flex items-center space-x-4"
+                className="text-sm font-medium text-error hover:text-hover transition-colors"
               >
                 Logout
               </button>
             ) : (
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="text-sm font-medium text-link hover:text-hover transition-colors">
+                Login
+              </Link>
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-700 ">
-              {isOpen ? "not open" : "open"}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-navbar-text focus:outline-none"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+           <Menu/>
+          </button>
         </div>
 
-        {/*Mother div or container of Mobile Navigation Menu */}
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t grid grid-cols-1">
-              <NavLink to="/dashboard">Dashboard</NavLink>
-
-              {/* Mobile CTA Buttons */}
-              {user?.email ? (
-                <button onClick={handleLogout} className="md:hidden  space-x-4">
-                  Logout
-                </button>
-              ) : (
-                <div className="pt-4 border-t border-gray-200 space-y-2">
-                  <Link to="/login">Login</Link>
-                </div>
-              )}
-            </div>
+          <div className="md:hidden border-t border-border bg-navbar-bg py-2">
+            {links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={`${navLinkClass} block px-3 py-2 text-sm`}
+                onClick={toggleMenu}
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+            {user?.email ? (
+              <button
+                onClick={handleLogout}
+                className="block px-3 py-2 text-sm font-medium text-error hover:text-hover w-full text-left"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="block px-3 py-2 text-sm font-medium text-link hover:text-hover"
+                onClick={toggleMenu}
+              >
+                Login
+              </Link>
+            )}
           </div>
         )}
       </div>
     </nav>
   );
 };
+
 export default HealthcareNavbar;

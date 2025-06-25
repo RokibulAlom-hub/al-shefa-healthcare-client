@@ -128,12 +128,14 @@ export default function MedicineStore() {
               ))}
               <div className="pt-4 border-t">
                 <form onSubmit={placeOrder}>
-                  <input type="text" placeholder="Enter your number"  onChange={(e) => setNumber(e.target.value)}  />
+                  <label htmlFor=""> Phone Number</label> <br />
+                  <input type="text" placeholder="+48794487"  onChange={(e) => setNumber(e.target.value)}/> <br />
+                  <label htmlFor="">Address:</label><br />
                   <textarea
                     onChange={(e) => setaddress(e.target.value)}
                     name="address"
                     rows={"3"}
-                    placeholder="Enter Your Address"
+                    placeholder="Gulshan 2 ,Dhaka"
                   ></textarea>
                   <button
                     type="submit"

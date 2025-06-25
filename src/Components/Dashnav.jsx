@@ -2,74 +2,95 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
+import { Menu, X } from "lucide-react";
 
 const Dashnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
-  const { role } = useRole();
+  const { role, isLoading } = useRole(); // Assume useRole returns isLoading
   const navigate = useNavigate();
+
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((data) => !data);
   };
-  //logut function
-  const handleLogout = () => {
-    logout().then((res) => {
-      // console.log(res);
-      alert("logout successfully");
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      // Replace alert with a toast notification (e.g., react-toastify)
+      // toast.success("Logged out successfully");
+      console.log("Logged out successfully"); // Temporary placeholder
       navigate("/login");
-    });
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // toast.error("Logout failed");
+      console.log("Logout failed"); // Temporary placeholder
+    }
   };
-  // console.log(user);
+
+  // Common NavLink styling with active state
+  const navLinkClass = ({ isActive }) =>
+    `text-base font-medium hover:text-primary transition-colors ${
+      isActive ? "text-red-600 underline font-semibold" : "text-navbar-text"
+    }`;
+
+  // Navigation links by role (shared for desktop and mobile)
+  const navLinks = {
+    admin: [
+      { to: "/dash/admin", label: "All Users" },
+      { to: "/dash/doctors", label: "Doctors" },
+      { to: "/dash/pharmacists", label: "Pharmacists" },
+      { to: "/dash/appointments", label: "Appointments" },
+      { to: "/dash/orders", label: "Orders" },
+    ],
+    doctor: [
+      { to: "/dash/doctorAppoinments", label: "Records" },
+      { to: "/dash/appointmentRecord", label: "Current Appointment" },
+    ],
+    patient: [
+      { to: "/dash/patient", label: "My Appointments" },
+      { to: "/dash/myorders", label: "Orders" },
+    ],
+    pharmacist: [
+      { to: "/dash/orders", label: "Orders" },
+      { to: "/dash/addmedicine", label: "Add Medicine" },
+      { to: "/dash/medicine", label: "All Medicine" },
+    ],
+  };
 
   return (
     <nav className="bg-navbar-bg shadow-lg text-navbar-text">
       <div className="container mx-auto px-4">
-        {/* Mother div or container of desktop navigation menu */}
+        {/* Desktop Navigation */}
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
           <div className="flex items-center space-x-2">
             <div className="flex flex-col">
-              <span className="text-xl font-bold ">
-                Al Shefa Healtcare
-              </span>
-              <span className="text-xs  text-center">
-                Your Health Partner
-              </span>
+              <span className="text-xl font-bold">Al Shefa Healthcare</span>
+              <span className="text-xs">Your Health Partner</span>
             </div>
           </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-             <NavLink to="/">Home</NavLink>
-            {role === "admin" && (
-              <>
-                <NavLink to="/dash/admin">Alluser</NavLink>
-                {/* <NavLink to="/dash/createProfile">CreateProfile</NavLink> */}
-                <NavLink to="/dash/doctors">Doctors</NavLink>
-                <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
-                <NavLink to="/dash/appoinments">Appoinments</NavLink>
-                <NavLink to="/dash/orders">Orders</NavLink>
-              </>
-            )}
-            {role === "doctor" && (
-              <>
-                <NavLink to="/dash/doctorAppoinments">Records</NavLink>
-                {/* <NavLink to="/dash/dProfile">Myprofile</NavLink> */}
-                <NavLink to="/dash/appointmentRecord">CurrentAppoinment</NavLink>
-              </>
-            )}
-            {role === "patient" && (
-              <>
-                <NavLink to="/dash/patient">MyAppoinments</NavLink>
-                <NavLink to="/dash/myorders">Orders</NavLink>
-              </>
-            )}
-            {role === "pharmasict" && (
-              <>
-                <NavLink to="/dash/orders">Orders</NavLink>
-                <NavLink to="/dash/addmedicine">AddMedicine</NavLink>
-                <NavLink to="/dash/medicine">AllMedicine</NavLink>
-              </>
+            <NavLink to="/" className={navLinkClass}>
+              Home
+            </NavLink>
+            {isLoading ? (
+              <span className="text-sm">Loading...</span>
+            ) : (
+              navLinks[role]?.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={navLinkClass}
+                  aria-current={({ isActive }) =>
+                    isActive ? "page" : undefined
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))
             )}
           </div>
 
@@ -78,77 +99,80 @@ const Dashnav = () => {
             {user?.email ? (
               <button
                 onClick={handleLogout}
-                className="hidden md:flex items-center space-x-4"
+                className="text-base font-medium text-red-600 hover:text-red-800 transition-colors"
               >
                 Logout
               </button>
             ) : (
-              <Link to="/login">Login</Link>
+              <Link
+                to="/login"
+                className="text-base font-medium hover:text-primary transition-colors"
+              >
+                Login
+              </Link>
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-700 ">
-              {isOpen ? "not open" : "open"}
+            <button
+              onClick={toggleMenu}
+              className="text-gray-700 focus:outline-none"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
 
-        {/*Mother div or container of Mobile Navigation Menu */}
+        {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col">
-              {
-                //this is admin navigation for mobile
-                role === "admin" && (
-                  <>
-                    <NavLink to="/dash/admin">Alluser</NavLink>
-                    <NavLink to="/dash/createProfile">CreateProfile</NavLink>
-                    <NavLink to="/dash/doctors">Doctors</NavLink>
-                    <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
-                    <NavLink to="/dash/appoinments">Appoinments</NavLink>
-                    <NavLink to="/dash/orders">Orders</NavLink>
-                  </>
-                )
-              }
-              {
-                // doctor naviagtion menu for mobile
-                role === "doctor" && (
-                  <>
-                    <NavLink to="/dash/doctorAppoinments">Appoinments</NavLink>
-                    <NavLink to="/dash/dProfile">Myprofile</NavLink>
-                    <NavLink to="/dash/appoinHistory">Allappoinments</NavLink>
-                  </>
-                )
-              }
-              {
-                //patient mobile menu
-                role === "patient" && (
-                  <>
-                    <NavLink to="/dash/patient">MyRecords</NavLink>
-                    <NavLink to="/dash/mdetails">Mydetails</NavLink>
-                  </>
-                )
-              }
-              {
-                //pharmasict mobile menu
-                role === "pharmasict" && (
-                  <>
-                    <NavLink to="/dash/orders">Orders</NavLink>
-                    <NavLink to="/dash/addmedicine">AddMedicine</NavLink>
-                    <NavLink to="/dash/medicine">AllMedicine</NavLink>
-                  </>
-                )
-              }
-              <button onClick={handleLogout} className="md:hidden  space-x-4">
+          <div className="md:hidden px-2 pt-2 pb-3 space-y-2 flex flex-col">
+            <NavLink to="/" className={navLinkClass} onClick={toggleMenu}>
+              Home
+            </NavLink>
+            {isLoading ? (
+              <span className="text-sm">Loading...</span>
+            ) : (
+              navLinks[role]?.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={navLinkClass}
+                  onClick={toggleMenu}
+                  aria-current={({ isActive }) =>
+                    isActive ? "page" : undefined
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))
+            )}
+            {user?.email ? (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  toggleMenu();
+                }}
+                className="text-base font-medium text-red-600 hover:text-red-800 transition-colors text-left"
+              >
                 Logout
               </button>
-            </div>
+            ) : (
+              <Link
+                to="/login"
+                className="text-base font-medium hover:text-primary transition-colors"
+                onClick={toggleMenu}
+              >
+                Login
+              </Link>
+            )}
           </div>
         )}
       </div>
     </nav>
   );
 };
+
 export default Dashnav;

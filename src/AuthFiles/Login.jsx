@@ -7,151 +7,150 @@ import useAuth from "../Hooks/useAuth";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {userLogin} = useAuth();
+  const { userLogin } = useAuth();
   const {
     register,
     handleSubmit,
-    setValue, // ← ADD THIS
+    setValue,
+    formState: { errors },
   } = useForm();
 
-  //prefill funtions
   const handlePrefill = (role) => {
     const credentials = {
-      admin: {email:"rokibbhai@gmail.com",password:"Pa$$w0rd!"},
-      doctor: {email:"farukdoc@gmail.com",password:"Pa$$w0rd!"},
-      pharmasicts: {email:"miyadVai@gamil.com",password:"Pa$$w0rd!"},
-      patient: {email:"prabirDada@gmail.com",password:"Pa$$w0rd!"},
+      admin: { email: "rokibbhai@gmail.com", password: "Pa$$w0rd!" },
+      doctor: { email: "farukDoc@gmail.com", password: "Pa$$w0rd!" },
+      pharmacist: { email: "miyadupharam@gmail.com", password: "Pa$$w0rd!" },
+      patient: { email: "prabirDada@gmail.com", password: "Pa$$w0rd!" },
+    };
+    const userCred = credentials[role];
+    if (userCred) {
+      setValue("email", userCred.email);
+      setValue("password", userCred.password);
     }
-  
-     const userCred = credentials[role];
-     if (userCred) {
-      setValue("email",userCred.email)
-      setValue("password",userCred.password)
-     }
-  
-  }
+  };
 
-  const onSubmit = (data) => {
-    // Add your login logic here
-    userLogin(data?.email,data?.password)
-    .then((res) => {
-      // console.log(res);
-      alert('user logged in')
-    })
-    .catch((error) => {
-        alert("Error", error.message, "error");
-      });
+  const onSubmit = async (data) => {
+    try {
+      await userLogin(data.email, data.password);
+      alert.success("Logged in successfully");
+    } catch (error) {
+      alert.error(`Login failed: ${error.message}`);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-section-bg py-8 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-6">
         {/* Header */}
-        <div className="flex justify-center">
-          <div className="bg-blue-600 p-3 rounded-full">
-            <Heart className="h-8 w-8 text-white" />
+        <div className="flex flex-col items-center">
+          <div className="bg-primary-btn p-3 rounded-full">
+            <Heart className="h-6 w-6 text-btn-text" />
           </div>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold text-primary-text">
+            Welcome Back Log In
+          </h2>
         </div>
-        <h2 className="mt-6 text-3xl text-center font-extrabold text-gray-900">
-          Welcome Back
-        </h2>
-        <div className="flex justify-center items-center gap-4 mb-4">
-          <h1 className="font-bold">Log in as a</h1>
-          <button
-            type="button"
-            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
-            onClick={() => handlePrefill("admin")}
-          >
-            Admin
-          </button>
-          <button
-            type="button"
-            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
-            onClick={() => handlePrefill("doctor")}
-          >
-            Doctor
-          </button>
-          <button
-            type="button"
-            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
-            onClick={() => handlePrefill("pharmasicts")}
-          >
-            Pharmasicts
-          </button>
-          <button
-            type="button"
-            className="bg-blue-500 text-white px-2 py-1 rounded-lg"
-            onClick={() => handlePrefill("patient")}
-          >
-           Patient
-          </button>
+
+        {/* Prefill Buttons */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {["admin", "doctor", "pharmacist", "patient"].map((role) => (
+            <button
+              key={role}
+              type="button"
+              className="bg-secondary-btn text-btn-text px-3 py-1 rounded-lg text-sm hover:bg-hover transition-colors"
+              onClick={() => handlePrefill(role)}
+              aria-label={`Prefill as ${role}`}
+            >
+              {role.toUpperCase()}
+            </button>
+          ))}
         </div>
 
         {/* Login Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mt-8 space-y-6 bg-white p-8 rounded-xl shadow-lg"
+          className="bg-card-bg p-6 rounded-xl shadow-lg space-y-4"
         >
-          <div className="space-y-4">
-            {/* Email Field */}
+          {/* Email Field */}
+          <div>
+            <label htmlFor="email" className="sr-only">
+              Email
+            </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
-              </div>
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-text" />
               <input
-                {...register("email", { required: true })}
+                id="email"
                 type="email"
-                className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("email", {
+                  required: "Email is required",
+                })}
+                className="w-full pl-10 pr-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-btn"
                 placeholder="Enter your email"
               />
             </div>
+            {errors.email && (
+              <p className="text-error text-xs mt-1">{errors.email.message}</p>
+            )}
+          </div>
 
-            {/* Password Field */}
+          {/* Password Field */}
+          <div>
+            <label htmlFor="password" className="sr-only">
+              Password
+            </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-gray-400" />
-              </div>
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-text" />
               <input
-                {...register("password", { required: true, minLength: 6 })}
+                id="password"
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                className="w-full pl-10 pr-12 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-btn"
                 placeholder="Enter your password"
               />
               <button
                 type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                className="absolute right-3 top-1/2 -translate-y-1/2"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
-                  <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                  <EyeOff className="h-5 w-5 text-secondary-text" />
                 ) : (
-                  <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                  <Eye className="h-5 w-5 text-secondary-text" />
                 )}
               </button>
             </div>
+            {errors.password && (
+              <p className="text-error text-xs mt-1">{errors.password.message}</p>
+            )}
           </div>
 
           {/* Submit Button */}
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200"
-            >
-              Sign In to Your Account
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-primary-btn text-btn-text rounded-lg text-sm font-medium hover:bg-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-btn transition"
+          >
+            Sign In
+          </button>
 
-          {/* Social Login Options */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* Google Login */}
+          <div className="flex justify-center">
             <GoogleLogin />
           </div>
 
           {/* Register Link */}
-          <div className="text-center">
-            <Link to="/register" className="text-sm text-gray-600">
-              Don't have an account?
+          <p className="text-center text-sm text-secondary-text">
+            Don’t have an account?{" "}
+            <Link to="/register" className="text-link hover:text-hover">
+              Register
             </Link>
-          </div>
+          </p>
         </form>
       </div>
     </div>
