@@ -21,6 +21,7 @@ import MyAppoinment from "../Pages/DashboardPages/patients/MyAppoinment.jsx";
 import Myorders from "../Pages/DashboardPages/patients/Myorders.jsx";
 import AllDoctorsToShow from "../Pages/HomeLayoutPages/Showdoctors/AllDoctorsToShow.jsx";
 import AppointmentBooking from "../Pages/HomeLayoutPages/Appoinments/AppointmentBooking.jsx";
+import MedicineStore from "../Pages/HomeLayoutPages/ShowMedicines/MedicineStore.jsx";
 
 export const router = createBrowserRouter([
     // homelayout pages and components
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path:"/ourDoctors",
                 element:<AllDoctorsToShow/>
+            },
+            {
+                path:"/medicinestore",
+                element:<MedicineStore/>
             },
             {
                 path:"/appoinment/:_id",
