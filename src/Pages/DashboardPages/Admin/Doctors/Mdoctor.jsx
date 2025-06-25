@@ -17,7 +17,7 @@ const Mdoctor = ({ doctors }) => {
             </div>
             <div>
               <span className="font-medium">Specialization:</span>{" "}
-              {doctor?.specialization}
+              {doctor?.education}
             </div>
             <div>
               <span className="font-medium">Experience:</span>{" "}

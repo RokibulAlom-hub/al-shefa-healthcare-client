@@ -4,7 +4,7 @@ const Morders = ({ allorders }) => {
     <div className="space-y-4 p-4">
       {allorders.map((orderData) => (
         <div
-          key={orderData._id.$oid}
+          key={orderData._id}
           className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm"
         >
           <div className="font-semibold text-lg mb-2">
@@ -12,8 +12,8 @@ const Morders = ({ allorders }) => {
           </div>
           <div className="space-y-1 text-sm">
             <div>
-              <span className="font-medium">Customer Email:</span>{' '}
-              {orderData.customeremail}
+              <span className="font-medium">CustomerPhone:</span>{' '}
+              {orderData.customerPhone}
             </div>
             <div>
               <span className="font-medium">Order Date:</span>{' '}

@@ -41,12 +41,10 @@ const Dashnav = () => {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
              <NavLink to="/">Home</NavLink>
-             <NavLink to="/ourDoctors">Doctors</NavLink>
-             <NavLink to="/medicinestore">MedicineStore</NavLink>
             {role === "admin" && (
               <>
                 <NavLink to="/dash/admin">Alluser</NavLink>
-                <NavLink to="/dash/createProfile">CreateProfile</NavLink>
+                {/* <NavLink to="/dash/createProfile">CreateProfile</NavLink> */}
                 <NavLink to="/dash/doctors">Doctors</NavLink>
                 <NavLink to="/dash/pharmacists">Pharmacists</NavLink>
                 <NavLink to="/dash/appoinments">Appoinments</NavLink>
@@ -55,14 +53,14 @@ const Dashnav = () => {
             )}
             {role === "doctor" && (
               <>
-                <NavLink to="/dash/doctorAppoinments">Allappoinments</NavLink>
-                <NavLink to="/dash/dProfile">Myprofile</NavLink>
+                <NavLink to="/dash/doctorAppoinments">Records</NavLink>
+                {/* <NavLink to="/dash/dProfile">Myprofile</NavLink> */}
                 <NavLink to="/dash/appointmentRecord">CurrentAppoinment</NavLink>
               </>
             )}
             {role === "patient" && (
               <>
-                <NavLink to="/dash/patient">Appoinments</NavLink>
+                <NavLink to="/dash/patient">MyAppoinments</NavLink>
                 <NavLink to="/dash/myorders">Orders</NavLink>
               </>
             )}

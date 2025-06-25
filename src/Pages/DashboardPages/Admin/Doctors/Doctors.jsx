@@ -9,7 +9,7 @@ const Doctors = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     const fetchDoctors = async () => {
-      const response = await axiosSecure.get(`/doc-pharma?role=doctor`);
+      const response = await axiosSecure.get(`/doctors`);
       setDoctors(response?.data);
     };
     fetchDoctors();

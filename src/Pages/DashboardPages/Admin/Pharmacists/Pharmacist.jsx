@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import PharmaCard from "./PharmaCard";
 import Mpharmacist from "./Mpharmacist";
+import { useQuery } from "@tanstack/react-query";
 
 const Pharamacist = () => {
-  const [pharamacists, setpharamacists] = useState(null);
   const axiosSecure = useAxiosSecure();
-  useEffect(() => {
-    const fetchPharma = async () => {
-      const response = await axiosSecure.get(`/doc-pharma?role=pharmacist`);
-      setpharamacists(response?.data);
-    };
-    fetchPharma();
-  }, [axiosSecure]);
+  const { data: pharamacists } = useQuery({
+    queryKey: ["pharmasicst"],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/pharmacists`);
+      console.log(response);
+      return response.data;
+    },
+  });
 
   if (!pharamacists) {
     return <div className="p-4">Loading...</div>;
   }
-  // console.log(pharamacists);
+  console.log(pharamacists);
 
   return (
     <div className="p-4">

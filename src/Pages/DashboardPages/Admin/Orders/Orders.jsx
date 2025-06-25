@@ -8,6 +8,7 @@ const Orders = () => {
 
   const {
     data: allorders,
+    
     isLoading,
     error,
     refetch,
@@ -15,6 +16,8 @@ const Orders = () => {
     queryKey: ["allorders"],
     queryFn: async () => {
       const response = await axiosSecure.get("/orderMedi");
+      console.log(response);
+      
       return response.data;
     },
   });
@@ -37,7 +40,7 @@ const Orders = () => {
   if (isLoading) return <div className="p-4">Loading...</div>;
   if (error) return <div className="p-4">Error loading appointments</div>;
   const tableHeadValue = {
-    CustomerName: "CustomerName",
+    CustomerPhone: "CustomerPhone",
     OrderDate: "OrderDate",
     DeliveryAddress: "DeliveryAddress",
     Status: "Status",

@@ -18,7 +18,7 @@ const DoctorAppoinmentList = () => {
       const response = await axiosSecure.get(
         `/appoinments?email=${user?.email}`
       );
-      console.log(response);
+      // console.log(response);
       return response?.data;
     },
   });
@@ -53,7 +53,7 @@ const DoctorAppoinmentList = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">
-        All Appoinments ({appoinments.length})
+         Record ({appoinments.length})
       </h2>
 
       {/* Desktop Table */}

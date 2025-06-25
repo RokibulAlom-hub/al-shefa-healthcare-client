@@ -40,6 +40,8 @@ const HealthcareNavbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/dash">Dashboard</NavLink>
+            <NavLink to="/ourDoctors">Doctors</NavLink>
+            <NavLink to="/medicinestore">MedicineStore</NavLink>
           </div>
 
           {/* Desktop CTA Buttons */}
@@ -72,10 +74,7 @@ const HealthcareNavbar = () => {
 
               {/* Mobile CTA Buttons */}
               {user?.email ? (
-                <button
-                  onClick={handleLogout}
-                  className="md:hidden  space-x-4"
-                >
+                <button onClick={handleLogout} className="md:hidden  space-x-4">
                   Logout
                 </button>
               ) : (

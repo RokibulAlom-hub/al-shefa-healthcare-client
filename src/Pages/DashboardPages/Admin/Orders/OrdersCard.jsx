@@ -7,15 +7,15 @@ const OrdersCard = ({ allorders, onRolechange, tableHeadValue }) => {
     }
   };
   //destruct the table value here
-  const { CustomerName, OrderDate, DeliveryAddress, Status } = tableHeadValue;
+  const { CustomerPhone, OrderDate, DeliveryAddress, Status } = tableHeadValue;
   return (
     <div>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-gray-300 p-3 text-left">#</th>
+            <th className="border border-gray-300 p-3 text-left">Order ID</th>
             <th className="border border-gray-300 p-3 text-left">
-              {CustomerName}
+              {CustomerPhone}
             </th>
             <th className="border border-gray-300 p-3 text-left">
               {OrderDate}
@@ -23,21 +23,33 @@ const OrdersCard = ({ allorders, onRolechange, tableHeadValue }) => {
             <th className="border border-gray-300 p-3 text-left">
               {DeliveryAddress}
             </th>
+            <th className="border border-gray-300 p-3 text-left">Items</th>
             <th className="border border-gray-300 p-3 text-left">{Status}</th>
           </tr>
         </thead>
         <tbody>
           {allorders.map((orderData, index) => (
-            <tr key={index} className="hover:bg-gray-50">
+            <tr key={orderData._id} className="hover:bg-gray-50">
               <td className="border border-gray-300 p-3">{index + 1}</td>
-              <td className="border border-gray-300 p-3">{orderData?.email}</td>
               <td className="border border-gray-300 p-3">
-                {orderData?.orderDate}
+                {orderData.customerPhone}
               </td>
               <td className="border border-gray-300 p-3">
-                {orderData?.deliveryAddress}
+                {new Date(orderData.orderDate).toLocaleDateString()}
               </td>
-
+              <td className="border border-gray-300 p-3">
+                {orderData.deliveryAddress}
+              </td>
+              <td className="border border-gray-300 p-3">
+                <ul className="list-disc pl-5">
+                  {orderData.items.map((item, index) => (
+                    <li key={index} className="text-sm">
+                      {item.name} ({item.quantity} {item.unit}, ৳
+                      {item.pricePerUnit})
+                    </li>
+                  ))}
+                </ul>
+              </td>
               <td className="border border-gray-300 p-3">
                 <select
                   value={orderData?.status}

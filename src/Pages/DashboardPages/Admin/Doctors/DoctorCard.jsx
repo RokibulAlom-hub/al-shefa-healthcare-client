@@ -26,7 +26,7 @@ const DocPharmaCard = ({ doctors }) => {
                 {doctor.qualification}
               </td>
               <td className="border border-gray-300 p-3">
-                {doctor.specialization}
+                {doctor.education}
               </td>
               <td className="border border-gray-300 p-3">
                 {doctor.experience} years

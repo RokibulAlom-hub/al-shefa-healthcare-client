@@ -11,6 +11,7 @@ export default function MedicineStore() {
   const [cart, setCart] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [address, setaddress] = useState("");
+  const [number, setNumber] = useState("");
   const axiosPublic = useAxiosPublic()
   const {user} = useAuth()
   const { data: medicines } = useQuery({
@@ -66,7 +67,8 @@ export default function MedicineStore() {
       orderDate : new Date().toISOString(),
       status :"pending",
       deliveryAddress:address,
-      customeremail:user?.email
+      customeremail:user?.email,
+      customerPhone:number
     };
     console.log(orderData);
       try {
@@ -126,6 +128,7 @@ export default function MedicineStore() {
               ))}
               <div className="pt-4 border-t">
                 <form onSubmit={placeOrder}>
+                  <input type="text" placeholder="Enter your number"  onChange={(e) => setNumber(e.target.value)}  />
                   <textarea
                     onChange={(e) => setaddress(e.target.value)}
                     name="address"

@@ -18,7 +18,7 @@ const LoginPage = () => {
   const handlePrefill = (role) => {
     const credentials = {
       admin: {email:"rokibbhai@gmail.com",password:"Pa$$w0rd!"},
-      doctor: {email:"farukDoc@gmail.com",password:"Pa$$w0rd!"},
+      doctor: {email:"farukdoc@gmail.com",password:"Pa$$w0rd!"},
       pharmasicts: {email:"miyadVai@gamil.com",password:"Pa$$w0rd!"},
       patient: {email:"prabirDada@gmail.com",password:"Pa$$w0rd!"},
     }

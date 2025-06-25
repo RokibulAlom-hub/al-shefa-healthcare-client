@@ -16,11 +16,11 @@ const PMappoinCard = ({ appoinments }) => {
             </div>
             <div>
               <span className="font-medium">Patient:</span>{" "}
-              {appoinmentData?.patientName}
+              {appoinmentData?.patientname}
             </div>
             <div>
               <span className="font-medium">Doctor:</span>{" "}
-              {appoinmentData?.doctorName}
+              {appoinmentData?.doctorname}
             </div>
             <div>
               <span className="font-medium">Date:</span>{" "}

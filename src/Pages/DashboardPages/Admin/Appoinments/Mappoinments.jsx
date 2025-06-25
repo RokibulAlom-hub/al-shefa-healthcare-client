@@ -21,19 +21,19 @@ const Mappoinments = ({ appoinments, onRolechange }) => {
             </div>
             <div>
               <span className="font-medium">Patient:</span>{" "}
-              {appoinmentData?.patientName}
+              {appoinmentData?.patientname}
             </div>
             <div>
               <span className="font-medium">Doctor:</span>{" "}
-              {appoinmentData?.doctorName}
+              {appoinmentData?.doctorname}
             </div>
             <div>
               <span className="font-medium">Date:</span>{" "}
-              {appoinmentData?.appointmentDate}
+             {appoinmentData?.date}
             </div>
             <div>
               <span className="font-medium">Time:</span>{" "}
-              {appoinmentData?.appointmentTime}
+             {appoinmentData?.time}
             </div>
             <div>
               <span className="font-medium">Status:</span>

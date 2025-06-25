@@ -30,16 +30,16 @@ const AppoinmentCard = ({
               <tr key={index} className="hover:bg-gray-50">
                 <td className="border border-gray-300 p-3">{index + 1}</td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.patientName}
+                  {appoinmentData?.patientname}
                 </td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.doctorName}
+                  {appoinmentData?.doctorname}
                 </td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.appointmentDate}
+                  {appoinmentData?.date}
                 </td>
                 <td className="border border-gray-300 p-3">
-                  {appoinmentData?.appointmentTime}
+                  {appoinmentData?.time}
                 </td>
                 <td className="border border-gray-300 p-3">
                   <select
