@@ -12,14 +12,21 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
       {/* Doctor Image */}
-      <div className="relative h-64 bg-gradient-to-br from-orange-100 to-purple-100 flex items-center justify-center">
-        <div className="text-8xl">{doctor.image}</div>
-        {doctor.isAvailable && (
-          <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Available
-          </div>
-        )}
-      </div>
+       <div className="relative h-32 flex items-center justify-center mt-2">
+                <img
+                  src={doctor.image || "https://via.placeholder.com/128"}
+                  alt={`Dr. ${doctor.name}`}
+                  className="w-32 h-32 rounded-full object-cover"
+                />
+                {doctor.isAvailable && (
+                  <div
+                    className="absolute top-2 right-2 bg-success text-btn-text px-2 py-1 rounded-full text-xs font-medium"
+                    aria-label={`${doctor.name} is available`}
+                  >
+                    Available
+                  </div>
+                )}
+              </div>
 
       {/* Doctor Info */}
       <div className="p-6">

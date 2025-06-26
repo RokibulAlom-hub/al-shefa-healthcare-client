@@ -15,7 +15,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-navbar-bg py-8 text-primary-text">
+    <footer className="bg-navbar-bg py-8 text-primary-text border-t border-primary-btn">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>

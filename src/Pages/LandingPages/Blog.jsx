@@ -8,7 +8,7 @@ const Blog = () => {
       excerpt:
         "Learn essential tips to keep your heart healthy and reduce the risk of cardiovascular disease.",
       date: "March 15, 2025",
-      image: "https://via.placeholder.com/300x200?text=Heart+Health",
+      image: "https://i.ibb.co/4RV1k510/pexels-karolina-grabowska-4386467-1.jpg",
       slug: "heart-health-tips",
     },
     {
@@ -16,7 +16,7 @@ const Blog = () => {
       excerpt:
         "Discover why regular checkups and preventive care are crucial for long-term health.",
       date: "March 10, 2025",
-      image: "https://via.placeholder.com/300x200?text=Preventive+Care",
+      image: "https://i.ibb.co/ch5fqR7q/pexels-cottonbro-3951893.jpg",
       slug: "preventive-care",
     },
     {
@@ -24,7 +24,7 @@ const Blog = () => {
       excerpt:
         "Breaking the stigma around mental health and promoting overall wellness in our community.",
       date: "March 5, 2025",
-      image: "https://via.placeholder.com/300x200?text=Mental+Health",
+      image: "https://i.ibb.co/zLkddvp/pexels-natalie-bond-320378-3759657.jpg",
       slug: "mental-health-awareness",
     },
   ];
@@ -67,12 +67,13 @@ const Blog = () => {
                   <p className="text-sm text-secondary-text mb-3">
                     {article.excerpt}
                   </p>
-                  <Link
-                    to={`/blog/${article.slug}`}
+                  <a
+                    href="https://www.healthline.com/"
+                    target="new"
                     className="text-link hover:text-hover font-medium flex items-center text-sm"
                   >
                     Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))

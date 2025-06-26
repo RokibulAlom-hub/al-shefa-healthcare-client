@@ -5,6 +5,7 @@ import CartCard from "./CartCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 export default function MedicineStore() {
   const [filteredMedicines, setFilteredMedicines] = useState([]);
@@ -12,8 +13,8 @@ export default function MedicineStore() {
   const [searchTerm, setSearchTerm] = useState("");
   const [address, setaddress] = useState("");
   const [number, setNumber] = useState("");
-  const axiosPublic = useAxiosPublic()
-  const {user} = useAuth()
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
   const { data: medicines } = useQuery({
     queryKey: "getMedicine",
     queryFn: async () => {
@@ -60,22 +61,22 @@ export default function MedicineStore() {
       prevCart.filter((item) => item.medicineId !== medicineId)
     );
   };
-  const placeOrder =async (e) => {
+  const placeOrder = async (e) => {
     e.preventDefault();
     const orderData = {
       items: cart, // Keep items as is
-      orderDate : new Date().toISOString(),
-      status :"pending",
-      deliveryAddress:address,
-      customeremail:user?.email,
-      customerPhone:number
+      orderDate: new Date().toISOString(),
+      status: "pending",
+      deliveryAddress: address,
+      customeremail: user?.email,
+      customerPhone: number,
     };
     console.log(orderData);
-      try {
+    try {
       // Replace with your actual API endpoint
       const response = await axiosPublic.post(`/orderMedi`, orderData);
       if (response) {
-        alert('order created')
+        alert("order created");
       } else {
         alert("failed to book");
       }
@@ -115,38 +116,47 @@ export default function MedicineStore() {
             Cart ({cart?.length})
           </h2>
 
-          {cart?.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">Your cart is empty</p>
-          ) : (
-            <div className="space-y-4">
-              {cart?.map((item) => (
-                <CartCard
-                  item={item}
-                  updateQuantity={updateQuantity}
-                  removeFromCart={removeFromCart}
-                />
-              ))}
-              <div className="pt-4 border-t">
-                <form onSubmit={placeOrder}>
-                  <label htmlFor=""> Phone Number</label> <br />
-                  <input type="text" placeholder="+48794487"  onChange={(e) => setNumber(e.target.value)}/> <br />
-                  <label htmlFor="">Address:</label><br />
-                  <textarea
-                    onChange={(e) => setaddress(e.target.value)}
-                    name="address"
-                    rows={"3"}
-                    placeholder="Gulshan 2 ,Dhaka"
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="w-full  text-white py-2 rounded-md bg-primary-btn hover:bg-hover"
-                  >
-                    Place Order
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
+          <div className="space-y-4">
+            {cart?.map((item) => (
+              <CartCard
+                item={item}
+                updateQuantity={updateQuantity}
+                removeFromCart={removeFromCart}
+              />
+            ))}
+            {
+              user?.email ? <div className="pt-4 border-t">
+              <form onSubmit={placeOrder}>
+                <label htmlFor=""> Phone Number</label> <br />
+                <input
+                  type="text"
+                  placeholder="+48794487"
+                  onChange={(e) => setNumber(e.target.value)}
+                />{" "}
+                <br />
+                <label htmlFor="">Address:</label>
+                <br />
+                <textarea
+                  onChange={(e) => setaddress(e.target.value)}
+                  name="address"
+                  rows={"3"}
+                  placeholder="Gulshan 2 ,Dhaka"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="w-full  text-white py-2 rounded-md bg-primary-btn hover:bg-hover"
+                >
+                  Place Order
+                </button>
+              </form>
+            </div> : <Link
+                  to={"/login"}
+                  className="text-red-500"
+                >
+                 Login Please To Order Medicine
+                </Link>
+            }
+          </div>
         </div>
       </div>
     </div>

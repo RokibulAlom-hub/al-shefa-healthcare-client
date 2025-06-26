@@ -69,7 +69,7 @@ const HealthcareNavbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="text-sm font-medium text-link hover:text-hover transition-colors"
+                className="text-sm font-medium text-success hover:text-hover transition-colors"
               >
                 Login
               </Link>
