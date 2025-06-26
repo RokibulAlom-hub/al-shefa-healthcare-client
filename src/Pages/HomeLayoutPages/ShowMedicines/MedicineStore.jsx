@@ -139,7 +139,7 @@ export default function MedicineStore() {
                   ></textarea>
                   <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
+                    className="w-full  text-white py-2 rounded-md bg-primary-btn hover:bg-hover"
                   >
                     Place Order
                   </button>
