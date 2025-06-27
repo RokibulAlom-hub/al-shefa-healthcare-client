@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import Marquee from "react-fast-marquee";
 
 const Testimonials = () => {
   const testimonials = [
@@ -51,40 +52,38 @@ const Testimonials = () => {
             Read testimonials from our satisfied patients who trust us with their health
           </p>
         </div>
-        <div className="relative">
-          <div className="flex animate-scroll gap-6">
-            {[...testimonials, ...testimonials].map((testimonial, idx) => (
-              <div
-                key={`${testimonial.name}-${idx}`}
-                className="min-w-[300px] bg-card-bg rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                role="article"
-                aria-labelledby={`${testimonial.name}-title`}
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 text-primary-btn fill-current"
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <p className="text-secondary-text text-sm italic mb-4">
-                  "{testimonial.text}"
-                </p>
-                <div>
-                  <h4
-                    id={`${testimonial.name}-title`}
-                    className="text-base font-semibold text-primary-text"
-                  >
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-link text-xs">{testimonial.role}</p>
-                </div>
+        <Marquee pauseOnHover gradient={false} speed={40} aria-label="Patient testimonials">
+          {testimonials.map((testimonial, idx) => (
+            <div
+              key={`${testimonial.name}-${idx}`}
+              className="w-[250px] bg-card-bg rounded-xl p-5 shadow-md transition-shadow mx-3"
+              role="article"
+              aria-labelledby={`${testimonial.name}-title`}
+            >
+              <div className="flex mb-3">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-4 w-4 text-primary-btn fill-current"
+                    aria-hidden="true"
+                  />
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+              <p className="text-secondary-text text-sm italic mb-3 line-clamp-3">
+                "{testimonial.text}"
+              </p>
+              <div>
+                <h4
+                  id={`${testimonial.name}-title`}
+                  className="text-base font-semibold text-primary-text"
+                >
+                  {testimonial.name}
+                </h4>
+                <p className="text-link text-xs">{testimonial.role}</p>
+              </div>
+            </div>
+          ))}
+        </Marquee>
       </div>
     </section>
   );
