@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 export default function AppointmentBooking() {
   const {_id} = useParams()
   const {user} = useAuth()
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,7 +15,7 @@ export default function AppointmentBooking() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      patientName: "",
+      patientname: "",
       age: "",
       address: "",
       number: "",
@@ -43,6 +44,7 @@ export default function AppointmentBooking() {
       if (response) {
         alert('appoinment created')
         reset();
+        navigate('/dash/doctorAppoinments')
       } else {
         alert("failed to book");
       }
@@ -65,14 +67,14 @@ export default function AppointmentBooking() {
               Patient Name
             </label>
             <input
-              {...register("patientName", {
+              {...register("patientname", {
                 required: "Patient name is required",
               })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {errors.patientName && (
+            {errors.patientname && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.patientName.message}
+                {errors.patientname.message}
               </p>
             )}
           </div>

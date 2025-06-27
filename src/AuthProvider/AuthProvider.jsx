@@ -41,7 +41,7 @@ const Authprovider = ({ children }) => {
       //settings jwt web token
       if (currentUser?.email) {
         const jwtUser = { email: currentUser?.email };
-        fetch("http://localhost:7000/jwt", {
+        fetch("https://health-server-five.vercel.app/jwt", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
