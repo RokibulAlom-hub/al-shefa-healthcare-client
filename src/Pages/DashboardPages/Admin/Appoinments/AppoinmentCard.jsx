@@ -43,14 +43,15 @@ const AppoinmentCard = ({
                 </td>
                 <td className="border border-gray-300 p-3">
                   <select
-                    value={appoinmentData?.status}
+                    value={appoinmentData.status}
                     onChange={(e) =>
                       handleStatusChange(appoinmentData?._id, e.target.value)
                     }
+                    disabled={appoinmentData.status === "Cancelled"}
                     className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
+                    <option value={appoinmentData?.status}>{appoinmentData.status}</option>
                     <option value="Confirmed">Confirmed</option>
-                    <option value="Pending">Pending</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
                 </td>

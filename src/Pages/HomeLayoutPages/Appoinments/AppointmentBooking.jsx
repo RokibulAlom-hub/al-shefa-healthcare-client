@@ -20,7 +20,7 @@ export default function AppointmentBooking() {
       number: "",
       time: "",
       date: "",
-      status: "pending",
+      status: "Pending",
     },
   });
   //get doctor data
@@ -34,7 +34,7 @@ export default function AppointmentBooking() {
   })
   
   const onSubmit = async (data) => {
-    const finalData = { ...data,patientemail:user.email, doctorName:doctoData.name,doctoremail:doctoData.email };
+    const finalData = { ...data,patientemail:user.email, doctorname:doctoData.name,doctoremail:doctoData.email };
     console.log(finalData);
     
     try {

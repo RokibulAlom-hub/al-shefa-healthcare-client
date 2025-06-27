@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Heart, Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "../Hooks/GoogleLogin";
 import useAuth from "../Hooks/useAuth";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
   const { userLogin } = useAuth();
   const {
     register,
@@ -32,7 +33,8 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     try {
       await userLogin(data.email, data.password);
-      alert.success("Logged in successfully");
+      alert("Logged in successfully");
+      navigate("/dash")
     } catch (error) {
       alert.error(`Login failed: ${error.message}`);
     }

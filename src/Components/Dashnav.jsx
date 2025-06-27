@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
-import { Menu, X } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 
 const Dashnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
-  const { role, isLoading } = useRole(); // Assume useRole returns isLoading
+  const { role, isLoading } = useRole();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -17,30 +17,25 @@ const Dashnav = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      // Replace alert with a toast notification (e.g., react-toastify)
-      // toast.success("Logged out successfully");
-      console.log("Logged out successfully"); // Temporary placeholder
+      console.log("Logged out successfully");
       navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
-      // toast.error("Logout failed");
-      console.log("Logout failed"); // Temporary placeholder
+      console.log("Logout failed");
     }
   };
 
-  // Common NavLink styling with active state
   const navLinkClass = ({ isActive }) =>
-    `text-base font-medium hover:text-primary transition-colors ${
-      isActive ? "text-red-600 underline font-semibold" : "text-navbar-text"
-    }`;
+    `text-sm font-medium transition-colors ${
+      isActive ? "text-link underline" : "text-navbar-text"
+    } hover:text-hover`;
 
-  // Navigation links by role (shared for desktop and mobile)
   const navLinks = {
     admin: [
       { to: "/dash/admin", label: "All Users" },
       { to: "/dash/doctors", label: "Doctors" },
       { to: "/dash/pharmacists", label: "Pharmacists" },
-      { to: "/dash/appointments", label: "Appointments" },
+      { to: "/dash/appoinments", label: "Appointments" },
       { to: "/dash/orders", label: "Orders" },
     ],
     doctor: [
@@ -59,20 +54,17 @@ const Dashnav = () => {
   };
 
   return (
-    <nav className="bg-navbar-bg shadow-lg text-navbar-text">
+    <nav className="sticky top-0 bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200 z-50 text-black">
       <div className="container mx-auto px-4">
-        {/* Desktop Navigation */}
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
-          <div className="flex items-center space-x-2">
-            <div className="flex flex-col">
-              <span className="text-xl font-bold">Al Shefa Healthcare</span>
-              <span className="text-xs">Your Health Partner</span>
-            </div>
+          {/* Logo */}
+          <div className="flex justify-center items-center">
+            <Heart className="h-6 w-6 text-primary-btn mr-2" />
+            <h2 className="text-xl font-bold">HealthCare+</h2>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center space-x-6">
             <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
@@ -84,29 +76,23 @@ const Dashnav = () => {
                   key={link.to}
                   to={link.to}
                   className={navLinkClass}
-                  aria-current={({ isActive }) =>
-                    isActive ? "page" : undefined
-                  }
+                  aria-current={({ isActive }) => (isActive ? "page" : undefined)}
                 >
                   {link.label}
                 </NavLink>
               ))
             )}
-          </div>
-
-          {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
             {user?.email ? (
               <button
                 onClick={handleLogout}
-                className="text-base font-medium text-red-600 hover:text-red-800 transition-colors"
+                className="text-sm font-medium text-error hover:text-hover transition-colors"
               >
                 Logout
               </button>
             ) : (
               <Link
                 to="/login"
-                className="text-base font-medium hover:text-primary transition-colors"
+                className="text-sm font-medium text-success hover:text-hover transition-colors"
               >
                 Login
               </Link>
@@ -114,36 +100,32 @@ const Dashnav = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-700 focus:outline-none"
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X /> : <Menu />}
-            </button>
-          </div>
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-navbar-text focus:outline-none"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X /> : <Menu />}
+          </button>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden px-2 pt-2 pb-3 space-y-2 flex flex-col">
-            <NavLink to="/" className={navLinkClass} onClick={toggleMenu}>
+          <div className="md:hidden border-t border-border bg-navbar-bg py-2">
+            <NavLink to="/" className={`${navLinkClass} block px-3 py-2 text-sm`} onClick={toggleMenu}>
               Home
             </NavLink>
             {isLoading ? (
-              <span className="text-sm">Loading...</span>
+              <span className="text-sm block px-3 py-2">Loading...</span>
             ) : (
               navLinks[role]?.map((link) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
-                  className={navLinkClass}
+                  className={`${navLinkClass} block px-3 py-2 text-sm`}
                   onClick={toggleMenu}
-                  aria-current={({ isActive }) =>
-                    isActive ? "page" : undefined
-                  }
+                  aria-current={({ isActive }) => (isActive ? "page" : undefined)}
                 >
                   {link.label}
                 </NavLink>
@@ -155,14 +137,14 @@ const Dashnav = () => {
                   handleLogout();
                   toggleMenu();
                 }}
-                className="text-base font-medium text-red-600 hover:text-red-800 transition-colors text-left"
+                className="block px-3 py-2 text-sm font-medium text-error hover:text-hover w-full text-left"
               >
                 Logout
               </button>
             ) : (
               <Link
                 to="/login"
-                className="text-base font-medium hover:text-primary transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-success hover:text-hover"
                 onClick={toggleMenu}
               >
                 Login

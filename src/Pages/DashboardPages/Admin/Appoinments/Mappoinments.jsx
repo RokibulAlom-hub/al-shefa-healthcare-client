@@ -28,24 +28,25 @@ const Mappoinments = ({ appoinments, onRolechange }) => {
               {appoinmentData?.doctorname}
             </div>
             <div>
-              <span className="font-medium">Date:</span>{" "}
-             {appoinmentData?.date}
+              <span className="font-medium">Date:</span> {appoinmentData?.date}
             </div>
             <div>
-              <span className="font-medium">Time:</span>{" "}
-             {appoinmentData?.time}
+              <span className="font-medium">Time:</span> {appoinmentData?.time}
             </div>
             <div>
               <span className="font-medium">Status:</span>
               <select
                 value={appoinmentData.status}
+                 disabled={appoinmentData.status === "Cancelled"}
                 onChange={(e) =>
                   handleStatusChange(appoinmentData?._id, e.target.value)
                 }
                 className="ml-2 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
+                <option value={appoinmentData?.status}>
+                  {appoinmentData.status}
+                </option>
                 <option value="Confirmed">Confirmed</option>
-                <option value="Pending">Pending</option>
                 <option value="Cancelled">Cancelled</option>
               </select>
             </div>

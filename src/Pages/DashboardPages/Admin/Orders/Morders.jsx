@@ -51,6 +51,7 @@ const Morders = ({ allorders, onRolechange }) => {
               <span className="font-medium">Status:</span>
               <select
                 value={orderData?.status}
+                disabled={orderData.status === "Cancelled"}
                 onChange={(e) =>
                   handleStatusChange(orderData?._id, e.target.value)
                 }

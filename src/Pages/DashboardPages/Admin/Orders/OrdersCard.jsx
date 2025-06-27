@@ -53,11 +53,13 @@ const OrdersCard = ({ allorders, onRolechange, tableHeadValue }) => {
               <td className="border border-gray-300 p-3">
                 <select
                   value={orderData?.status}
+                   disabled={orderData.status === "Cancelled"}
                   onChange={(e) =>
                     handleStatusChange(orderData?._id, e.target.value)
                   }
                   className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
+                  <option >{orderData?.status}</option>
                   <option value="Delivered">Delivered</option>
                   <option value="Shipped">Shipped</option>
                   <option value="Cancelled">Cancelled</option>
